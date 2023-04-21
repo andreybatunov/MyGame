@@ -1,0 +1,77 @@
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.exe
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.deps.json
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.runtimeconfig.json
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.pdb
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\MonoGame.Framework.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct2D1.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct3D11.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct3D9.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.DXGI.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Mathematics.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.MediaFoundation.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.XAudio2.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.XInput.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\debian-x64\native\libuv.so
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\fedora-x64\native\libuv.so
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\opensuse-x64\native\libuv.so
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\osx\native\libuv.dylib
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\rhel-x64\native\libuv.so
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-arm\native\libuv.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-x64\native\libuv.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-x86\native\libuv.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.AssemblyReference.cache
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.GeneratedMSBuildEditorConfig.editorconfig
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.AssemblyInfoInputs.cache
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.AssemblyInfo.cs
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.CoreCompileInputs.cache
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.CopyComplete
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\refint\Tetris Adventures.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.pdb
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.genruntimeconfig.cache
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\ref\Tetris Adventures.dll
+A:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\Person.xnb
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\Person.xnb
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.exe
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.deps.json
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.runtimeconfig.json
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Tetris Adventures.pdb
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\MonoGame.Framework.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct2D1.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct3D11.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Direct3D9.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.DXGI.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.Mathematics.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.MediaFoundation.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.XAudio2.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\SharpDX.XInput.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\debian-x64\native\libuv.so
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\fedora-x64\native\libuv.so
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\opensuse-x64\native\libuv.so
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\osx\native\libuv.dylib
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\rhel-x64\native\libuv.so
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-arm\native\libuv.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-x64\native\libuv.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\runtimes\win7-x86\native\libuv.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.AssemblyReference.cache
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.AssemblyInfoInputs.cache
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.AssemblyInfo.cs
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.CoreCompileInputs.cache
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.csproj.CopyComplete
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\refint\Tetris Adventures.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.pdb
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\Tetris Adventures.genruntimeconfig.cache
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\obj\Debug\net6.0-windows\ref\Tetris Adventures.dll
+D:\Tetris Adventures\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\Player.xnb
