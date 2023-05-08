@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/Tetris Adventures/Tetris Adventures/Tetris Adventures/Content/playerSprite.png</SourceFile>
+  <SourceFile>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/playerSprite.png</SourceFile>
   <SourceTime>2023-04-27T21:28:39.5704643+05:00</SourceTime>
-  <DestFile>D:/Tetris Adventures/Tetris Adventures/Tetris Adventures/Content/bin/Windows/playerSprite.xnb</DestFile>
-  <DestTime>2023-04-27T21:30:56.6860682+05:00</DestTime>
+  <DestFile>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/bin/Windows/playerSprite.xnb</DestFile>
+  <DestTime>2023-05-08T23:02:19.9669165+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

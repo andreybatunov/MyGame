@@ -7538,11 +7538,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
+      "projectUniqueName": "D:\\TA Repos\\MyGame\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
       "projectName": "Tetris Adventures",
-      "projectPath": "D:\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
+      "projectPath": "D:\\TA Repos\\MyGame\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
       "packagesPath": "C:\\Users\\ondru\\.nuget\\packages\\",
-      "outputPath": "D:\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures\\obj\\",
+      "outputPath": "D:\\TA Repos\\MyGame\\Tetris Adventures\\Tetris Adventures\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

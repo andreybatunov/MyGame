@@ -14,7 +14,6 @@ namespace Tetris_Adventures
     {
         Texture2D spritesheet;
         int frames;
-        int rows;
         int pointer = 0;
         int width;
         int height;
@@ -27,7 +26,7 @@ namespace Tetris_Adventures
             this.height = height;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, int row, float millisecondsPerFrames = 75)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, int row, float millisecondsPerFrames)
         {
             if (pointer <=  frames)
             {

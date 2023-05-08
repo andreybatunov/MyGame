@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S7p3HxSVjpNBN5UpzLhw3x60Oxbl+dEBvLGI2BRvfhsM6fC463s1+PNguvnc3qC6BP0eXUnByBZ33Md6WMFQPg==",
+  "dgSpecHash": "osaKqPZ0sf/djPfOXvo0XsHqUG1ckTMK1i7lwUELGDh6xH2XKl1duFZg4VXd+fP0PwtLr7kRF/v9NQNhny1BHg==",
   "success": true,
-  "projectFilePath": "D:\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
+  "projectFilePath": "D:\\TA Repos\\MyGame\\Tetris Adventures\\Tetris Adventures\\Tetris Adventures.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ondru\\.nuget\\packages\\libuv\\1.9.1\\libuv.1.9.1.nupkg.sha512",
     "C:\\Users\\ondru\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\1.1.0\\microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512",
