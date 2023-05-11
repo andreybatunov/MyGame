@@ -9,9 +9,13 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/jumpingSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/playerSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/runningSpritePlayer.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/spawningSprite.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tetrisFigures.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

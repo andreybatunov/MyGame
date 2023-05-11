@@ -17,14 +17,15 @@ namespace Tetris_Adventures
 
         public enum CurrentAnimation
         {
-            IdleLeft,
             IdleRight,
+            IdleLeft, 
             RunRight,
             RunLeft,
             LeftJumping,
             RightJumping,
             LeftFalling,
-            RightFalling
+            RightFalling,
+            Spawning,
         }
 
         public abstract void Update();

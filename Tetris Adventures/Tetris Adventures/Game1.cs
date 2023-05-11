@@ -12,13 +12,18 @@ namespace Tetris_Adventures
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        #region TetrisManager
+        private TetrisManager tetris;
+        private Texture2D tetrisSprite;
+        #endregion
+
         #region Tilemaps
         private TmxMap map;
         private TilemapManager tilemapManager;
         private Texture2D tileset;
         private List<Rectangle> collisionRectangles;
-        private Rectangle startRectangle;
-        private Rectangle endRectangle;
+        private Vector2 startPosition;
+        private Rectangle deathRectangle;
         #endregion
 
         #region Player
@@ -27,6 +32,7 @@ namespace Tetris_Adventures
         private Texture2D runningPlayerSprite;
         private Texture2D fallingPlayerSprite;
         private Texture2D jumpingPlayerSprite;
+        private Texture2D spawningPlayerSprite;
         #endregion
 
         public Game1()
@@ -38,6 +44,7 @@ namespace Tetris_Adventures
 
         protected override void Initialize()
         {
+            IsMouseVisible = false;
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferWidth = 1440;
             graphics.PreferredBackBufferHeight = 800;
@@ -49,13 +56,7 @@ namespace Tetris_Adventures
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            #region Player
-            playerSprite = Content.Load<Texture2D>("idleSprite");
-            runningPlayerSprite = Content.Load<Texture2D>("runningSpritePlayer");
-            fallingPlayerSprite = Content.Load<Texture2D>("fallingSprite");
-            jumpingPlayerSprite = Content.Load<Texture2D>("jumpingSprite");
-            player = new Player(runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
-            #endregion
+          
 
             #region Tilemap
             map = new TmxMap("Content\\map.tmx");
@@ -73,9 +74,30 @@ namespace Tetris_Adventures
                 {
                     collisionRectangles.Add(new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height));
                 }
+                if (obj.Name == "start")
+                {
+                    startPosition = new Vector2((int)obj.X, (int)obj.Y);
+                }
+                if (obj.Name == "death")
+                {
+                    deathRectangle = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
+                }
             }
 
+            #region Player
 
+            playerSprite = Content.Load<Texture2D>("idleSprite");
+            spawningPlayerSprite = Content.Load<Texture2D>("spawningSprite");
+            runningPlayerSprite = Content.Load<Texture2D>("runningSpritePlayer");
+            fallingPlayerSprite = Content.Load<Texture2D>("fallingSprite");
+            jumpingPlayerSprite = Content.Load<Texture2D>("jumpingSprite");
+            player = new Player(startPosition, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
+            #endregion
+
+            #region TetrisManager
+            tetrisSprite = Content.Load<Texture2D>("tetrisFigures");
+            tetris = new TetrisManager(tetrisSprite);
+            #endregion
 
 
         }
@@ -110,11 +132,13 @@ namespace Tetris_Adventures
                     break;
                 }
             }
+            if (deathRectangle.Intersects(player.PlayerFallRectangle))
+            {
+                player = new Player(startPosition, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
+            }
             #endregion
 
-
-
-
+            tetris.Update();
 
             base.Update(gameTime);
         }
@@ -125,6 +149,7 @@ namespace Tetris_Adventures
             spriteBatch.Begin();
             tilemapManager.Draw(spriteBatch);
             player.Draw(spriteBatch, gameTime);
+            tetris.Draw(spriteBatch, gameTime);
             spriteBatch.End();
             base.Draw(gameTime);
         }

@@ -128,3 +128,5 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\idleSprite.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\fallingSprite.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\jumpingSprite.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\spawningSprite.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\tetrisFigures.xnb

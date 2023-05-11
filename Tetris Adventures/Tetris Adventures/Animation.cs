@@ -18,12 +18,14 @@ namespace Tetris_Adventures
         int width;
         int height;
         float timeSinceLastFrame;
-        public Animation(Texture2D spritesheet, int width, int height)
+        bool IsLooping;
+        public Animation(Texture2D spritesheet, int width, int height, bool isLooping)
         {
             this.spritesheet = spritesheet;
             frames = spritesheet.Width / width;
             this.width = width;
             this.height = height;
+            IsLooping = isLooping;
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, int row, float millisecondsPerFrames)
@@ -36,7 +38,11 @@ namespace Tetris_Adventures
                 if (timeSinceLastFrame > millisecondsPerFrames) 
                 {
                     timeSinceLastFrame -= millisecondsPerFrames;
-                    pointer++;
+                    if (pointer != frames && IsLooping)
+                    {
+                        pointer++;
+                    }
+                    
                     if (pointer == frames)
                     {
                         pointer = 0;
