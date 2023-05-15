@@ -16,6 +16,8 @@ namespace Tetris_Adventures
         public Vector2 Position { get; set; }
         public double RotationCorner;
         public Vector2 Origin;
+        public int Width;
+        public int Height;
 
         public TetrisObject(TetrisFigure figure, Vector2 position, Rectangle textureRectangle)
         {
@@ -23,13 +25,17 @@ namespace Tetris_Adventures
             Position = position;
             RotationCorner = 0;
             TextureRectangle = textureRectangle;
-            Origin = new Vector2(textureRectangle.Width / 2, textureRectangle.Height / 2);
+            Width = textureRectangle.Width;
+            Height = textureRectangle.Height;
+            Origin = new Vector2(Width / 2, Height / 2);
         }
 
         public TetrisObject(TetrisObject tetrisObject, Vector2 position)
         {
             Figure = tetrisObject.Figure;
             TextureRectangle = tetrisObject.TextureRectangle;
+            Width= tetrisObject.Width;
+            Height= tetrisObject.Height;
             Position = position;
             RotationCorner = tetrisObject.RotationCorner;
             Origin = tetrisObject.Origin;
@@ -38,6 +44,9 @@ namespace Tetris_Adventures
         public void Rotate()
         {
             RotationCorner += Math.PI / 2;
+            if (RotationCorner == 2*Math.PI)
+                RotationCorner = 0;
+            (Height, Width) = (Width, Height);
         }
     }
 }

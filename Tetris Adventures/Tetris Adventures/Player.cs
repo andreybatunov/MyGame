@@ -61,7 +61,9 @@ namespace Tetris_Adventures
             Move(keyboard);
             Jump(keyboard);
 
-            Hitbox.X = (int)Position.X;
+            Hitbox.X = Direction == Direction.Right 
+                ? (int)Position.X
+                : (int)Position.X - 7;
             Hitbox.Y = (int)Position.Y - 3;
             PlayerFallRectangle.X = (int)Position.X;
             PlayerFallRectangle.Y = (int)Velocity.Y + 40;

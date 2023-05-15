@@ -28,7 +28,9 @@ namespace Tetris_Adventures
         public Vector2 CurrentMousePosition;
         public TilemapManager TilemapManager;
         public Dictionary<Keys, TetrisFigure> KeyboardKeys;
-        public double timeCheck = 0;
+        public double RotateTimeCheck = 0;
+        public double SetObjectTimeCheck = 0;
+        public Vector2 DrawPos;
         
         public TetrisManager(Texture2D tetrisSprite, TilemapManager tilemapManager)
         {
@@ -36,7 +38,7 @@ namespace Tetris_Adventures
             Shapes = new Dictionary<TetrisFigure, Rectangle>()
             {
                 { TetrisFigure.None, new Rectangle(0, 0, 0, 0) },
-                { TetrisFigure.IShape, new Rectangle(0, 0, 22, 80) },
+                { TetrisFigure.IShape, new Rectangle(0, 0, 21, 80) },
                 { TetrisFigure.JShape, new Rectangle(23, 0, 41, 60) },
                 { TetrisFigure.LShape, new Rectangle(64, 0, 43, 60) },
                 { TetrisFigure.OShape, new Rectangle(107, 0, 45, 40) },
@@ -64,9 +66,17 @@ namespace Tetris_Adventures
         {
             var mouse = Mouse.GetState();
             var keyboard = Keyboard.GetState();
-            CurrentMousePosition.X = mouse.X + CurrentTetrisObject.TextureRectangle.Width / 2;
-            CurrentMousePosition.Y = mouse.Y + CurrentTetrisObject.TextureRectangle.Height / 2;
             GetHandleInput(keyboard, mouse, gameTime);
+            CurrentMousePosition.X = mouse.X;
+            CurrentMousePosition.Y = mouse.Y;
+            DrawPos.X = CurrentTetrisObject.Width % 2 == 0
+                ? CurrentMousePosition.X - (CurrentMousePosition.X % 20)
+                : CurrentMousePosition.X - (CurrentMousePosition.X % 20) - 10;
+            DrawPos.Y = CurrentTetrisObject.Height % 2 == 0
+                ? CurrentMousePosition.Y - (CurrentMousePosition.Y % 20)
+                : CurrentMousePosition.Y - (CurrentMousePosition.Y % 20) - 10;
+
+
         }
 
         public void GetHandleInput(KeyboardState keyboard, MouseState mouse, GameTime gameTime)
@@ -77,21 +87,31 @@ namespace Tetris_Adventures
                 if (keyboard.IsKeyDown(keyboardKey.Key))
                 {
                     CurrentTetrisObject.Figure = keyboardKey.Value;
+                    CurrentTetrisObject.Width = (Shapes[CurrentTetrisObject.Figure].Width - Shapes[CurrentTetrisObject.Figure].Width % 20) / 20;
+                    CurrentTetrisObject.Height = (Shapes[CurrentTetrisObject.Figure].Height - Shapes[CurrentTetrisObject.Figure].Height % 20) / 20;
                     CurrentTetrisObject.Origin.X = Shapes[CurrentTetrisObject.Figure].Width / 2;
                     CurrentTetrisObject.Origin.Y = Shapes[CurrentTetrisObject.Figure].Height / 2;
                     CurrentTetrisObject.RotationCorner = 0;
                 }
             }
-            if (mouse.LeftButton == ButtonState.Pressed && CurrentTetrisObject.Figure != TetrisFigure.None)
+            if (keyboard.IsKeyDown(Keys.C))
             {
-                SettedFigures.Add(new TetrisObject(CurrentTetrisObject,
-                    new Vector2(mouse.X, mouse.Y)));
+                SettedFigures.Clear();
+            }
+            if (mouse.LeftButton == ButtonState.Pressed 
+                && CurrentTetrisObject.Figure != TetrisFigure.None 
+                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 1000)
+            {
+                SettedFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
+                SetObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
                 //todo
             }
-            if (mouse.RightButton == ButtonState.Pressed && CurrentTetrisObject.Figure != TetrisFigure.None && gameTime.TotalGameTime.TotalMilliseconds - timeCheck > 200)
+            if (mouse.RightButton == ButtonState.Pressed 
+                && CurrentTetrisObject.Figure != TetrisFigure.None 
+                && gameTime.TotalGameTime.TotalMilliseconds - RotateTimeCheck > 200)
             { 
                 CurrentTetrisObject.Rotate();
-                timeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                RotateTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
         }
 
@@ -103,9 +123,9 @@ namespace Tetris_Adventures
                 spriteBatch.Draw(TetrisSpriteSheet, tetrisObject.Position, Shapes[tetrisObject.Figure], Color.White, (float)tetrisObject.RotationCorner, tetrisObject.Origin, 1f, SpriteEffects.None, 0f);
             }
             if (CurrentTetrisObject.Figure != TetrisFigure.None)
-            {
+            { 
                 spriteBatch.Draw(TetrisSpriteSheet,
-                    CurrentMousePosition,
+                    DrawPos,
                     Shapes[CurrentTetrisObject.Figure],
                     Color.White,
                     (float)CurrentTetrisObject.RotationCorner,
@@ -114,7 +134,6 @@ namespace Tetris_Adventures
                     SpriteEffects.None,
                     0f);
             }
-           
         }
     }
 }
