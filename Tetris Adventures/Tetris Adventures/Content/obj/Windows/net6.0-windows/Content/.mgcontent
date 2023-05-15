@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/fallingSprite.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/Font.spritefont</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/idleSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/jumpingSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/playerSprite.png</File>
@@ -14,6 +15,7 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

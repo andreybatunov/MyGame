@@ -1,3 +1,14 @@
-﻿
-using var game = new Tetris_Adventures.Game1();
-game.Run();
+﻿using System;
+
+
+
+namespace Tetris_Adventures;
+class Program
+{
+    static void Main()
+    {
+        var game = new Game1();
+        game.Run();
+    }
+}
+

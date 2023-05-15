@@ -57,18 +57,20 @@ namespace Tetris_Adventures
             tilemapManager = new TilemapManager(map, tileset);
             #endregion
 
+            
+
+            #region TetrisManager
+            tetrisSprite = Content.Load<Texture2D>("tetrisFigures");
+            tetris = new TetrisManager(tetrisSprite, tilemapManager);
+            #endregion
+
             #region Player
             playerSprite = Content.Load<Texture2D>("idleSprite");
             spawningPlayerSprite = Content.Load<Texture2D>("spawningSprite");
             runningPlayerSprite = Content.Load<Texture2D>("runningSpritePlayer");
             fallingPlayerSprite = Content.Load<Texture2D>("fallingSprite");
             jumpingPlayerSprite = Content.Load<Texture2D>("jumpingSprite");
-            player = new Player(tilemapManager, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
-            #endregion
-
-            #region TetrisManager
-            tetrisSprite = Content.Load<Texture2D>("tetrisFigures");
-            tetris = new TetrisManager(tetrisSprite, tilemapManager);
+            player = new Player(tilemapManager, tetris, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
             #endregion
 
 

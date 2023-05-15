@@ -11,20 +11,23 @@ namespace Tetris_Adventures
         public Vector2 Velocity;
         public float PlayerSpeed = 2.4f;
         public float FallSpeed = 8;
-        public float JumpSpeed = -11;
+        public float JumpSpeed = -12;
         public float StartY;
         public bool IsFalling = true;
         public bool IsJumping = false;
         public Rectangle PlayerFallRectangle;
+        public Rectangle PlayerJumpRectangle;
         public Direction Direction = Direction.Right;
         public TilemapManager TilemapManager;
+        public TetrisManager TetrisManager;
 
 
         public Animation[] playerAnimation;
         public CurrentAnimation playerAnimationController;
 
-        public Player(TilemapManager tilemapManager, Texture2D spawningSprite, Texture2D runSprite, Texture2D idleSprite, Texture2D fallingSprite, Texture2D jumpingSprite)
+        public Player(TilemapManager tilemapManager, TetrisManager tetrisManager, Texture2D spawningSprite, Texture2D runSprite, Texture2D idleSprite, Texture2D fallingSprite, Texture2D jumpingSprite)
         {
+            TetrisManager = tetrisManager;
             TilemapManager = tilemapManager;
             Position = TilemapManager.StartPosition;
             Velocity = TilemapManager.StartPosition;
@@ -39,6 +42,7 @@ namespace Tetris_Adventures
             };
             Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 40, 35);
             PlayerFallRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y + 40, 35, 1);
+            PlayerJumpRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y, 35, 1);
         }
 
         public override void Update()
@@ -63,7 +67,7 @@ namespace Tetris_Adventures
 
             Hitbox.X = Direction == Direction.Right 
                 ? (int)Position.X
-                : (int)Position.X - 7;
+                : (int)Position.X - 5;
             Hitbox.Y = (int)Position.Y - 3;
             PlayerFallRectangle.X = (int)Position.X;
             PlayerFallRectangle.Y = (int)Velocity.Y + 40;
@@ -93,6 +97,7 @@ namespace Tetris_Adventures
                     break;
                 }
             }
+            
             if (TilemapManager.DeathRectangle.Intersects(PlayerFallRectangle))
             {
                 Position = TilemapManager.StartPosition;
@@ -161,7 +166,7 @@ namespace Tetris_Adventures
                 {
                     IsJumping = true;
                     IsFalling = false;
-                    JumpSpeed = -13;
+                    JumpSpeed = -12;
                 }
             }
         }
