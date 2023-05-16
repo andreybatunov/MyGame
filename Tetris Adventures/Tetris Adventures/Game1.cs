@@ -83,7 +83,7 @@ namespace Tetris_Adventures
 
 
             tetris.Update(gameTime);
-            player.Update();
+            player.Update(gameTime);
             
 
             base.Update(gameTime);

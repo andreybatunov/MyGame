@@ -28,7 +28,7 @@ namespace Tetris_Adventures
             Spawning,
         }
 
-        public abstract void Update();
+        public abstract void Update(GameTime gameTime);
 
         public abstract void Draw(SpriteBatch spriteBatch, GameTime gameTime);
     }

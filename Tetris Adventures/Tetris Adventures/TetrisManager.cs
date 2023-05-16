@@ -101,9 +101,8 @@ namespace Tetris_Adventures
             }
             if (mouse.LeftButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
-                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 1000)
+                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 100)
             {
-                Console.WriteLine(DrawPos.ToString());
                 var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
                 if (possibleObject.Intersect(MapManager.CollisionObjects).Count() < 1)
                 {
@@ -111,8 +110,6 @@ namespace Tetris_Adventures
                     SettedFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
                     SetObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
                 }
-
-                //todo
             }
             if (mouse.RightButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
@@ -141,7 +138,6 @@ namespace Tetris_Adventures
                     return GetTShapeRectangles(tetrisObject, drawPos);
                 case TetrisFigure.SShape:
                     return GetSShapeRectangles(tetrisObject, drawPos);
-
             }
             return new List<Rectangle>();
         }
@@ -194,34 +190,34 @@ namespace Tetris_Adventures
                 case 0:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y + 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y + 10, 20, 20),
                      };
                 case Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y, 20, 20),
                     };
                 case Math.PI:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 30, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y + 10, 20, 20),
                     };
                 case 3 * Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
                     };
             }
             return new List<Rectangle>();
@@ -234,34 +230,34 @@ namespace Tetris_Adventures
                 case 0:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y + 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y + 10, 20, 20),
                      };
                 case Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y + 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
                     };
                 case Math.PI:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 30, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y + 10, 20, 20),
                     };
                 case 3 * Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y, 20, 20),
                     };
             }
             return new List<Rectangle>();
@@ -271,10 +267,10 @@ namespace Tetris_Adventures
         {
             return new List<Rectangle>
             {
-                new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 20, 20, 20),
+                new Rectangle((int)drawPos.X - 20, (int)drawPos.Y, 20, 20),
+                new Rectangle((int)drawPos.X, (int)drawPos.Y - 20, 20, 20),
+                new Rectangle((int)drawPos.X, (int)drawPos.Y, 20, 20),
             };
         }
 
@@ -283,17 +279,17 @@ namespace Tetris_Adventures
             return tetrisObject.RotationCorner == Math.PI / 2 || tetrisObject.RotationCorner == 3 * Math.PI / 2
                         ? new List<Rectangle>()
                         {
-                            new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X, (int)drawPos.Y - 30, 20, 20),
                             new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                            new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y + 10, 20, 20),
                         }
                         : new List<Rectangle>()
                         {
-                            new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 40, 20, 20),
+                            new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
                             new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
                             new Rectangle((int) drawPos.X - 10, (int)drawPos.Y, 20, 20),
-                            new Rectangle((int) drawPos.X - 10, (int)drawPos.Y + 20, 20, 20),
+                            new Rectangle((int) drawPos.X + 10, (int)drawPos.Y, 20, 20),
                         };
         }
 
@@ -304,34 +300,34 @@ namespace Tetris_Adventures
                 case 0:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y, 20, 20),
                      };
                 case Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y + 10, 20, 20),
                         new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
                     };
                 case Math.PI:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
-                    };
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
+                        new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
+                     };
                 case 3 * Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y - 30, 20, 20),
                         new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                        new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                        new Rectangle((int)drawPos.X, (int)drawPos.Y + 10, 20, 20),
+                        new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
                     };
             }
             return new List<Rectangle>();
@@ -342,26 +338,19 @@ namespace Tetris_Adventures
             return tetrisObject.RotationCorner == Math.PI / 2 || tetrisObject.RotationCorner == 3 * Math.PI / 2
                         ? new List<Rectangle>()
                         {
-                            new Rectangle((int)drawPos.X - 40, (int)drawPos.Y - 10, 20, 20),
-                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
-                            new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
-                            new Rectangle((int)drawPos.X + 20, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
+                            new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
+                            new Rectangle((int)drawPos.X - 30, (int)drawPos.Y, 20, 20),
+                            new Rectangle((int)drawPos.X - 10, (int)drawPos.Y, 20, 20),
                         }
                         : new List<Rectangle>()
                         {
-                            new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 40, 20, 20),
-                            new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
-                            new Rectangle((int) drawPos.X - 10, (int)drawPos.Y, 20, 20),
-                            new Rectangle((int) drawPos.X - 10, (int)drawPos.Y + 20, 20, 20),
+                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 30, 20, 20),
+                            new Rectangle((int)drawPos.X - 20, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X, (int)drawPos.Y - 10, 20, 20),
+                            new Rectangle((int)drawPos.X, (int)drawPos.Y + 10, 20, 20),
                         };
         }
-
-
-
-
-
-
-
 
 
 
