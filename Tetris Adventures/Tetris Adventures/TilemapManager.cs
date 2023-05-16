@@ -60,6 +60,7 @@ namespace Tetris_Adventures
                 if (obj.Name == "death")
                 {
                     DeathRectangle = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
+                    CollisionObjects.Add(DeathRectangle);
                 }
             }
         }

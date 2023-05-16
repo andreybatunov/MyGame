@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tetris_Adventures
 {
@@ -31,9 +32,10 @@ namespace Tetris_Adventures
         public double RotateTimeCheck = 0;
         public double SetObjectTimeCheck = 0;
         public static Vector2 DrawPos;
-        public List<Rectangle> TetrisCollisionObjects;
+        public Player Player;
+       
 
-        public TetrisManager(Texture2D tetrisSprite, TilemapManager tilemapManager)
+        public TetrisManager(Texture2D tetrisSprite, TilemapManager tilemapManager, Player player)
         {
             TetrisSpriteSheet = tetrisSprite;
             Shapes = new Dictionary<TetrisFigure, Rectangle>()
@@ -61,14 +63,13 @@ namespace Tetris_Adventures
             MapManager = tilemapManager;
             CurrentTetrisObject = new TetrisObject(TetrisFigure.None, new Vector2(), new Rectangle());
             SettedFigures = new List<TetrisObject>();
-            TetrisCollisionObjects = new List<Rectangle>();
+            Player = player;
         }
 
         public void Update(GameTime gameTime)
         {
             var mouse = Mouse.GetState();
             var keyboard = Keyboard.GetState();
-            GetHandleInput(keyboard, mouse, gameTime);
             CurrentMousePosition.X = mouse.X;
             CurrentMousePosition.Y = mouse.Y;
             DrawPos.X = CurrentTetrisObject.Width % 2 == 0
@@ -77,6 +78,9 @@ namespace Tetris_Adventures
             DrawPos.Y = CurrentTetrisObject.Height % 2 == 0
                 ? CurrentMousePosition.Y - (CurrentMousePosition.Y % 20)
                 : CurrentMousePosition.Y - (CurrentMousePosition.Y % 20) - 10;
+            CurrentTetrisObject.IsIntersect = IsGroundOfOtherFiguresIntersected()
+                || IsPlayerHitboxIntersected();
+            GetHandleInput(keyboard, mouse, gameTime);
         }
 
         public void GetHandleInput(KeyboardState keyboard, MouseState mouse, GameTime gameTime)
@@ -92,6 +96,8 @@ namespace Tetris_Adventures
                     CurrentTetrisObject.Origin.X = CurrentTetrisObject.Width * 10;
                     CurrentTetrisObject.Origin.Y = CurrentTetrisObject.Height * 10;
                     CurrentTetrisObject.RotationCorner = 0;
+                    CurrentTetrisObject.IsIntersect = IsGroundOfOtherFiguresIntersected()
+                                                     || IsPlayerHitboxIntersected();
                 }
             }
             if (keyboard.IsKeyDown(Keys.C))
@@ -104,7 +110,7 @@ namespace Tetris_Adventures
                 && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 100)
             {
                 var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
-                if (possibleObject.Intersect(MapManager.CollisionObjects).Count() < 1)
+                if (!CurrentTetrisObject.IsIntersect)
                 {
                     MapManager.CollisionObjects.AddRange(possibleObject);
                     SettedFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
@@ -154,7 +160,7 @@ namespace Tetris_Adventures
                 spriteBatch.Draw(TetrisSpriteSheet,
                     DrawPos,
                     Shapes[CurrentTetrisObject.Figure],
-                    Color.White,
+                    CurrentTetrisObject.IsIntersect ? Color.DarkSlateGray : Color.GhostWhite,
                     (float)CurrentTetrisObject.RotationCorner,
                     CurrentTetrisObject.Origin,
                     1f,
@@ -163,6 +169,31 @@ namespace Tetris_Adventures
             }
         }
 
+        public bool IsPlayerHitboxIntersected()
+        {
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            foreach(var square in squares)
+            {
+                if (Player.Hitbox.Intersects(square))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsGroundOfOtherFiguresIntersected()
+        {
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            foreach (var square in squares)
+            {
+                foreach (var obj in MapManager.CollisionObjects)
+                {
+                    if (square.Intersects(obj)) return true;
+                }
+            }
+            return false;
+        }
         #region Tetris Figures Collision
         public List<Rectangle> GetIShapeRectangles(TetrisObject tetrisObject, Vector2 drawPos)
         {

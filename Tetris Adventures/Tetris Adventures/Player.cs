@@ -7,7 +7,7 @@ using System;
 
 namespace Tetris_Adventures
 {
-    class Player : Entity
+    public class Player : Entity
     {
         public Vector2 Velocity;
         public float PlayerSpeed = 2.4f;
@@ -21,15 +21,13 @@ namespace Tetris_Adventures
         public Rectangle PlayerJumpRectangle;
         public Direction Direction = Direction.Right;
         public TilemapManager TilemapManager;
-        public TetrisManager TetrisManager;
 
 
         public Animation[] playerAnimation;
         public CurrentAnimation playerAnimationController;
 
-        public Player(TilemapManager tilemapManager, TetrisManager tetrisManager, Texture2D spawningSprite, Texture2D runSprite, Texture2D idleSprite, Texture2D fallingSprite, Texture2D jumpingSprite)
+        public Player(TilemapManager tilemapManager, Texture2D spawningSprite, Texture2D runSprite, Texture2D idleSprite, Texture2D fallingSprite, Texture2D jumpingSprite)
         {
-            TetrisManager = tetrisManager;
             TilemapManager = tilemapManager;
             Position = TilemapManager.StartPosition;
             Velocity = TilemapManager.StartPosition;
@@ -73,6 +71,8 @@ namespace Tetris_Adventures
             Hitbox.Y = (int)Position.Y - 3;
             PlayerFallRectangle.X = (int)Position.X;
             PlayerFallRectangle.Y = (int)Velocity.Y + 40;
+            PlayerJumpRectangle.X = (int)Position.X;
+            PlayerJumpRectangle.Y = (int)Velocity.Y;
             GetCollisions(initPosition);
             Position = Velocity;
         }
@@ -101,7 +101,14 @@ namespace Tetris_Adventures
                     break;
                 }
             }
-            
+            foreach (var rectangle in TilemapManager.CollisionObjects)
+            {
+                if (rectangle.Intersects(PlayerJumpRectangle))
+                {
+                    IsJumping = false;
+                }
+            }
+
             if (TilemapManager.DeathRectangle.Intersects(PlayerFallRectangle))
             {
                 Position = TilemapManager.StartPosition;
