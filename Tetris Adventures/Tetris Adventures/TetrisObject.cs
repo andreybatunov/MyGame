@@ -18,7 +18,7 @@ namespace Tetris_Adventures
         public Vector2 Origin;
         public int Width;
         public int Height;
-        public bool IsIntersect;
+        public bool CanBeSetted;
 
         public TetrisObject(TetrisFigure figure, Vector2 position, Rectangle textureRectangle)
         {

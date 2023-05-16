@@ -33,6 +33,7 @@ namespace Tetris_Adventures
         public double SetObjectTimeCheck = 0;
         public static Vector2 DrawPos;
         public Player Player;
+        public List<Rectangle> EnvironmentTetrisSquares;
        
 
         public TetrisManager(Texture2D tetrisSprite, TilemapManager tilemapManager, Player player)
@@ -63,6 +64,7 @@ namespace Tetris_Adventures
             MapManager = tilemapManager;
             CurrentTetrisObject = new TetrisObject(TetrisFigure.None, new Vector2(), new Rectangle());
             SettedFigures = new List<TetrisObject>();
+            EnvironmentTetrisSquares = new List<Rectangle>();
             Player = player;
         }
 
@@ -78,8 +80,9 @@ namespace Tetris_Adventures
             DrawPos.Y = CurrentTetrisObject.Height % 2 == 0
                 ? CurrentMousePosition.Y - (CurrentMousePosition.Y % 20)
                 : CurrentMousePosition.Y - (CurrentMousePosition.Y % 20) - 10;
-            CurrentTetrisObject.IsIntersect = IsGroundOfOtherFiguresIntersected()
-                || IsPlayerHitboxIntersected();
+            CurrentTetrisObject.CanBeSetted = !IsGroundOfOtherFiguresIntersected() 
+                && !IsPlayerHitboxIntersected()
+                && IsTouchingOtherFigure(); 
             GetHandleInput(keyboard, mouse, gameTime);
         }
 
@@ -96,24 +99,27 @@ namespace Tetris_Adventures
                     CurrentTetrisObject.Origin.X = CurrentTetrisObject.Width * 10;
                     CurrentTetrisObject.Origin.Y = CurrentTetrisObject.Height * 10;
                     CurrentTetrisObject.RotationCorner = 0;
-                    CurrentTetrisObject.IsIntersect = IsGroundOfOtherFiguresIntersected()
-                                                     || IsPlayerHitboxIntersected();
+                    CurrentTetrisObject.CanBeSetted = !IsGroundOfOtherFiguresIntersected()
+                                                     && !IsPlayerHitboxIntersected()
+                                                     && IsTouchingOtherFigure();
                 }
             }
             if (keyboard.IsKeyDown(Keys.C))
             {
                 MapManager.CollisionObjects.RemoveRange(MapManager.CollisionObjects.Count - SettedFigures.Count * 4, SettedFigures.Count * 4);
                 SettedFigures.Clear();
+                EnvironmentTetrisSquares.Clear();
             }
             if (mouse.LeftButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
-                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 100)
+                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 200)
             {
                 var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
-                if (!CurrentTetrisObject.IsIntersect)
+                if (CurrentTetrisObject.CanBeSetted)
                 {
                     MapManager.CollisionObjects.AddRange(possibleObject);
                     SettedFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
+                    EnvironmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
                     SetObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
                 }
             }
@@ -160,7 +166,7 @@ namespace Tetris_Adventures
                 spriteBatch.Draw(TetrisSpriteSheet,
                     DrawPos,
                     Shapes[CurrentTetrisObject.Figure],
-                    CurrentTetrisObject.IsIntersect ? Color.DarkSlateGray : Color.GhostWhite,
+                    CurrentTetrisObject.CanBeSetted ? Color.GhostWhite : Color.DarkSlateGray,
                     (float)CurrentTetrisObject.RotationCorner,
                     CurrentTetrisObject.Origin,
                     1f,
@@ -194,6 +200,42 @@ namespace Tetris_Adventures
             }
             return false;
         }
+
+        public bool IsTouchingOtherFigure()
+        {
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || SettedFigures.Count == 0;
+
+        }
+
+        public List<Rectangle> GetEnvironmentSquares(List<Rectangle> squaresList)
+        {
+            var environmentSquares = new List<Rectangle>();
+            foreach (var square in squaresList)
+            {
+                for (var x = -20; x < 21; x += 20)
+                {
+                    for (var y = -20; y < 21; y += 20)
+                    {
+                        if (Math.Abs(x) == Math.Abs(y)) continue;
+                        var newSquare = new Rectangle(square.X + x, square.Y + y, 20, 20);
+                        if (!squaresList.Contains(newSquare))
+                        {
+                            environmentSquares.Add(newSquare);
+                        }
+                    }
+                }
+            }
+            return environmentSquares;
+        }
+
+
+
+
+
+
+
+
         #region Tetris Figures Collision
         public List<Rectangle> GetIShapeRectangles(TetrisObject tetrisObject, Vector2 drawPos)
         {
@@ -269,7 +311,7 @@ namespace Tetris_Adventures
                 case Math.PI / 2:
                     return new List<Rectangle>()
                     {
-                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y + 20, 20, 20),
+                        new Rectangle((int)drawPos.X - 30, (int)drawPos.Y, 20, 20),
                         new Rectangle((int)drawPos.X - 30, (int)drawPos.Y - 20, 20, 20),
                         new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 20, 20, 20),
                         new Rectangle((int)drawPos.X + 10, (int)drawPos.Y - 20, 20, 20),
