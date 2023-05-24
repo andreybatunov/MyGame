@@ -148,3 +148,10 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\exit.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\howToPlay.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\Instructions.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\continueSheet.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\pauseExit.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\pauseLogo.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\pauseHowToPlay.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\numbersSheet.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOver.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOverReturn.xnb

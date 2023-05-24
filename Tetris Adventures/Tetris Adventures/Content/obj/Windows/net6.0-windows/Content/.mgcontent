@@ -4,9 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/continueSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/exit.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/fallingSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/Font.spritefont</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/gameOver.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/gameOverReturn.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/howToPlay.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/idleSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/Instructions.png</File>
@@ -14,6 +17,10 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/mainMenuLogo.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/menuBackground.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/newGame.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/numbersSheet.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/pauseExit.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/pauseHowToPlay.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/pauseLogo.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/playerSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/runningSpritePlayer.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/spawningSprite.png</File>
@@ -21,6 +28,13 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

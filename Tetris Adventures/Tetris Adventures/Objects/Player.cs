@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using Tetris_Adventures.Images;
 using Tetris_Adventures.Managers;
 
@@ -22,6 +20,7 @@ namespace Tetris_Adventures.Objects
         public Rectangle PlayerJumpRectangle;
         public Direction Direction = Direction.Right;
         public TilemapManager TilemapManager;
+        public bool IsAlive = true;
 
 
         public Animation[] playerAnimation;
@@ -50,6 +49,10 @@ namespace Tetris_Adventures.Objects
         {
             var initPosition = Position;
             var keyboard = Keyboard.GetState();
+            if (keyboard.IsKeyDown(Keys.Escape))
+            {
+
+            }
             playerAnimationController = Direction == Direction.Right
                 ? CurrentAnimation.IdleRight
                 : CurrentAnimation.IdleLeft;
@@ -62,7 +65,7 @@ namespace Tetris_Adventures.Objects
             }
 
 
-            Move(keyboard, initPosition);
+            Move(keyboard);
             StartY = Position.Y;
             Jump(keyboard, gameTime, initPosition);
 
@@ -112,12 +115,11 @@ namespace Tetris_Adventures.Objects
 
             if (TilemapManager.DeathRectangle.Intersects(PlayerFallRectangle))
             {
-                Position = TilemapManager.StartPosition;
-                Velocity = TilemapManager.StartPosition;
+                IsAlive = false;
             }
         }
 
-        private void Move(KeyboardState keyboard, Vector2 initPosition)
+        private void Move(KeyboardState keyboard)
         {
             if (keyboard.IsKeyDown(Keys.A))
             {
@@ -163,7 +165,7 @@ namespace Tetris_Adventures.Objects
                 Velocity.Y += JumpSpeed;
                 JumpSpeed += 1;
 
-                Move(keyboard, initPosition);
+                Move(keyboard);
                 playerAnimationController = Direction == Direction.Right
                     ? CurrentAnimation.RightJumping
                     : CurrentAnimation.LeftJumping;
@@ -189,36 +191,37 @@ namespace Tetris_Adventures.Objects
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            switch (playerAnimationController)
-            {
-                case CurrentAnimation.Spawning:
-                    playerAnimation[0].Draw(spriteBatch, Position, gameTime, 1, 100);
-                    break;
-                case CurrentAnimation.IdleRight:
-                    playerAnimation[2].Draw(spriteBatch, Position, gameTime, 1, 150);
-                    break;
-                case CurrentAnimation.IdleLeft:
-                    playerAnimation[2].Draw(spriteBatch, Position - new Vector2(5, 0), gameTime, 2, 150);
-                    break;
-                case CurrentAnimation.RunRight:
-                    playerAnimation[1].Draw(spriteBatch, Position, gameTime, 1, 75);
-                    break;
-                case CurrentAnimation.RunLeft:
-                    playerAnimation[1].Draw(spriteBatch, Position - new Vector2(5, 0), gameTime, 2, 75);
-                    break;
-                case CurrentAnimation.RightJumping:
-                    playerAnimation[4].Draw(spriteBatch, Position, gameTime, 1, 100);
-                    break;
-                case CurrentAnimation.LeftJumping:
-                    playerAnimation[4].Draw(spriteBatch, Position, gameTime, 2, 100);
-                    break;
-                case CurrentAnimation.RightFalling:
-                    playerAnimation[3].Draw(spriteBatch, Position, gameTime, 1, 75);
-                    break;
-                case CurrentAnimation.LeftFalling:
-                    playerAnimation[3].Draw(spriteBatch, Position, gameTime, 2, 75);
-                    break;
-            }
+            if (IsAlive)
+                switch (playerAnimationController)
+                {
+                    case CurrentAnimation.Spawning:
+                        playerAnimation[0].Draw(spriteBatch, Position, gameTime, 1, 100);
+                        break;
+                    case CurrentAnimation.IdleRight:
+                        playerAnimation[2].Draw(spriteBatch, Position, gameTime, 1, 150);
+                        break;
+                    case CurrentAnimation.IdleLeft:
+                        playerAnimation[2].Draw(spriteBatch, Position - new Vector2(5, 0), gameTime, 2, 150);
+                        break;
+                    case CurrentAnimation.RunRight:
+                        playerAnimation[1].Draw(spriteBatch, Position, gameTime, 1, 75);
+                        break;
+                    case CurrentAnimation.RunLeft:
+                        playerAnimation[1].Draw(spriteBatch, Position - new Vector2(5, 0), gameTime, 2, 75);
+                        break;
+                    case CurrentAnimation.RightJumping:
+                        playerAnimation[4].Draw(spriteBatch, Position, gameTime, 1, 100);
+                        break;
+                    case CurrentAnimation.LeftJumping:
+                        playerAnimation[4].Draw(spriteBatch, Position, gameTime, 2, 100);
+                        break;
+                    case CurrentAnimation.RightFalling:
+                        playerAnimation[3].Draw(spriteBatch, Position, gameTime, 1, 75);
+                        break;
+                    case CurrentAnimation.LeftFalling:
+                        playerAnimation[3].Draw(spriteBatch, Position, gameTime, 2, 75);
+                        break;
+                }
         }
     }
 }

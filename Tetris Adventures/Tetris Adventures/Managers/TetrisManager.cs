@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Tetris_Adventures.Objects;
+using MonoGame.Extended.Timers;
 
 namespace Tetris_Adventures.Managers
 {
@@ -22,7 +23,7 @@ namespace Tetris_Adventures.Managers
             SShape,
         }
 
-        public List<TetrisObject> SettedFigures;
+        public List<TetrisObject> DrawnFigures;
         public Texture2D TetrisSpriteSheet;
         public Dictionary<TetrisFigure, Rectangle> Shapes;
         public TetrisObject CurrentTetrisObject;
@@ -62,7 +63,7 @@ namespace Tetris_Adventures.Managers
             };
             MapManager = tilemapManager;
             CurrentTetrisObject = new TetrisObject(TetrisFigure.None, new Vector2(), new Rectangle());
-            SettedFigures = new List<TetrisObject>();
+            DrawnFigures = new List<TetrisObject>();
             EnvironmentTetrisSquares = new List<Rectangle>();
             Player = player;
         }
@@ -79,9 +80,7 @@ namespace Tetris_Adventures.Managers
             DrawPos.Y = CurrentTetrisObject.Height % 2 == 0
                 ? CurrentMousePosition.Y - CurrentMousePosition.Y % 20
                 : CurrentMousePosition.Y - CurrentMousePosition.Y % 20 - 10;
-            CurrentTetrisObject.CanBeSetted = !IsGroundOfOtherFiguresIntersected()
-                && !IsPlayerHitboxIntersected()
-                && IsTouchingOtherFigure();
+            CurrentTetrisObject.CanBeSetted = CanCurrentObjectBeSetted();
             GetHandleInput(keyboard, mouse, gameTime);
         }
 
@@ -96,9 +95,7 @@ namespace Tetris_Adventures.Managers
             }
             if (keyboard.IsKeyDown(Keys.C))
             {
-                MapManager.CollisionObjects.RemoveRange(MapManager.CollisionObjects.Count - SettedFigures.Count * 4, SettedFigures.Count * 4);
-                SettedFigures.Clear();
-                EnvironmentTetrisSquares.Clear();
+                ClearMap();
             }
             if (mouse.LeftButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
@@ -107,9 +104,7 @@ namespace Tetris_Adventures.Managers
                 var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
                 if (CurrentTetrisObject.CanBeSetted)
                 {
-                    MapManager.CollisionObjects.AddRange(possibleObject);
-                    SettedFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
-                    EnvironmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
+                    AddTetrisObject(possibleObject);
                     SetObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
                 }
             }
@@ -152,14 +147,12 @@ namespace Tetris_Adventures.Managers
             CurrentTetrisObject.Origin.X = CurrentTetrisObject.Width * 10;
             CurrentTetrisObject.Origin.Y = CurrentTetrisObject.Height * 10;
             CurrentTetrisObject.RotationCorner = 0;
-            CurrentTetrisObject.CanBeSetted = !IsGroundOfOtherFiguresIntersected()
-                                             && !IsPlayerHitboxIntersected()
-                                             && IsTouchingOtherFigure();
+            CurrentTetrisObject.CanBeSetted = CanCurrentObjectBeSetted();
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var tetrisObject in SettedFigures)
+            foreach (var tetrisObject in DrawnFigures)
             {
                 spriteBatch.Draw(TetrisSpriteSheet, tetrisObject.Position, Shapes[tetrisObject.Figure], Color.White, (float)tetrisObject.RotationCorner, tetrisObject.Origin, 1f, SpriteEffects.None, 0f);
             }
@@ -178,6 +171,11 @@ namespace Tetris_Adventures.Managers
         }
 
         #region TetrisCanBeSetted
+
+        public bool CanCurrentObjectBeSetted()
+        {
+            return !IsGroundOfOtherFiguresIntersected() && !IsPlayerHitboxIntersected() && IsTouchingOtherFigure();
+        }
 
         public bool IsPlayerHitboxIntersected()
         {
@@ -208,7 +206,7 @@ namespace Tetris_Adventures.Managers
         public bool IsTouchingOtherFigure()
         {
             var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
-            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || SettedFigures.Count == 0;
+            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || DrawnFigures.Count == 0;
         }
 
         #endregion
@@ -234,6 +232,19 @@ namespace Tetris_Adventures.Managers
             return environmentSquares;
         }
 
+        public void ClearMap()
+        {
+            MapManager.CollisionObjects.RemoveRange(MapManager.CollisionObjects.Count - DrawnFigures.Count * 4, DrawnFigures.Count * 4);
+            DrawnFigures.Clear();
+            EnvironmentTetrisSquares.Clear();
+        }
+
+        public void AddTetrisObject(List<Rectangle> possibleObject)
+        {
+            MapManager.CollisionObjects.AddRange(possibleObject);
+            DrawnFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
+            EnvironmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
+        }
 
         #region Tetris Figures Collision
         public List<Rectangle> GetIShapeRectangles(TetrisObject tetrisObject, Vector2 drawPos)
