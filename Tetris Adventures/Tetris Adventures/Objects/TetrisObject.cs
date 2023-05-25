@@ -14,6 +14,7 @@ namespace Tetris_Adventures.Objects
         public int Width;
         public int Height;
         public bool CanBeSetted;
+        public bool IsDelayPassed;
 
         public TetrisObject(TetrisFigure figure, Vector2 position, Rectangle textureRectangle)
         {

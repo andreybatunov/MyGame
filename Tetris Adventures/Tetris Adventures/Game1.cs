@@ -37,6 +37,7 @@ namespace Tetris_Adventures
         private Texture2D numbersSheet;
         private Texture2D gameOverSheet;
         private Texture2D gameOverReturnSheet;
+        private Texture2D bubbleSheet;
         #endregion
 
         #region Menu
@@ -123,7 +124,8 @@ namespace Tetris_Adventures
             numbersSheet = Content.Load<Texture2D>("numbersSheet");
             gameOverSheet = Content.Load<Texture2D>("gameOver");
             gameOverReturnSheet = Content.Load<Texture2D>("gameOverReturn");
-            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet);
+            bubbleSheet = Content.Load<Texture2D>("bubbleSheet");
+            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
             #endregion
 
             #region Menu
@@ -206,7 +208,7 @@ namespace Tetris_Adventures
             tilemapManager = new TilemapManager(map, tileset);
             player = new Player(tilemapManager, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
             tetrisManager = new TetrisManager(tetrisSprite, tilemapManager, player);
-            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet);
+            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
             pausePage.ResetLevelAfterExit = false;
         }
     }

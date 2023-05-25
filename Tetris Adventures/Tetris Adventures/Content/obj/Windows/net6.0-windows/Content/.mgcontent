@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/bubbleSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/continueSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/exit.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/fallingSprite.png</File>
@@ -28,6 +29,7 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

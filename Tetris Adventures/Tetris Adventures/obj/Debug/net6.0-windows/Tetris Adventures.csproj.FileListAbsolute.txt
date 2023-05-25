@@ -155,3 +155,4 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\numbersSheet.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOver.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOverReturn.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\bubbleSheet.xnb
