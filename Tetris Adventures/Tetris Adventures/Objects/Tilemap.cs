@@ -9,8 +9,11 @@ namespace Tetris_Adventures.Objects
     {
         public TmxMap Map { get; set; }
         public Texture2D Tileset { get; set; }
+        public Texture2D Finish { get; set; }
         public List<Rectangle> CollisionObjects { get; set; }
         public Vector2 StartPosition { get; set; }
-        public Rectangle DeathRectangle { get; set; }
+        public Rectangle FinishRectangle { get; set; }
+        public List<Rectangle> DeathRectangles { get; set; }
+        public List<Rectangle> SurfaceRectangles { get; set; }
     }
 }

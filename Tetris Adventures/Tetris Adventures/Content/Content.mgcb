@@ -61,6 +61,18 @@
 /processorParam:TextureFormat=Color
 /build:fallingSprite.png
 
+#begin finishFlag.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:finishFlag.png
+
 #begin Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -140,6 +152,15 @@
 /processorParam:TextureFormat=Color
 /build:jumpingSprite.png
 
+#begin level1.tmx
+/copy:level1.tmx
+
+#begin level2.tmx
+/copy:level2.tmx
+
+#begin level3.tmx
+/copy:level3.tmx
+
 #begin mainMenuLogo.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -151,9 +172,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:mainMenuLogo.png
-
-#begin map.tmx
-/copy:map.tmx
 
 #begin menuBackground.png
 /importer:TextureImporter
@@ -178,6 +196,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:newGame.png
+
+#begin newTileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:newTileset.png
 
 #begin numbersSheet.png
 /importer:TextureImporter

@@ -9,59 +9,84 @@ namespace Tetris_Adventures.Managers
 {
     public class TilemapManager : Tilemap
     {
+        public List<TmxMap> Maps { get; set; }
         public int TilesetTilesWide { get; set; }
         public int TileWidth { get; set; }
         public int TileHeight { get; set; }
-
-        public TilemapManager(TmxMap map, Texture2D tileset)
+        public int Level = 0;
+        public List<Color> Colors = new()
         {
-            Map = map;
+            Color.Aquamarine,
+            Color.DarkBlue,
+            Color.Magenta,
+            Color.Orange,
+            Color.Orchid,
+        };
+        public TilemapManager(List<TmxMap> maps, Texture2D tileset, Texture2D finish)
+        {
+            Maps = maps;
             Tileset = tileset;
-            TileWidth = map.Tilesets[0].TileWidth;
-            TileHeight = map.Tilesets[0].TileHeight;
-            TilesetTilesWide = tileset.Width / TileWidth;
+            Finish = finish;
+            InitializeTiles();
             GetCollisionsObjects();
+        }
+
+        public void InitializeTiles()
+        {
+            TileWidth = Maps[Level].Tilesets[0].TileWidth;
+            TileHeight = Maps[Level].Tilesets[0].TileHeight;
+            TilesetTilesWide = Tileset.Width / TileWidth;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (var i = 0; i < Map.TileLayers.Count; i++)
+            for (var i = 0; i < Maps[Level].TileLayers.Count; i++)
             {
-                for (var j = 0; j < Map.TileLayers[i].Tiles.Count; j++)
+                for (var j = 0; j < Maps[Level].TileLayers[i].Tiles.Count; j++)
                 {
-                    var gid = Map.TileLayers[i].Tiles[j].Gid;
+                    var gid = Maps[Level].TileLayers[i].Tiles[j].Gid;
                     if (gid == 0) continue;
                     else
                     {
                         var tileFrame = gid - 1;
                         var column = tileFrame % TilesetTilesWide;
                         var row = (int)Math.Floor(tileFrame / (double)TilesetTilesWide);
-                        float x = j % Map.Width * Map.TileWidth;
-                        float y = (float)Math.Floor(j / (double)Map.Width) * Map.TileHeight;
+                        var x = j % Maps[Level].Width * Maps[Level].TileWidth;
+                        var y = (float)Math.Floor(j / (double)Maps[Level].Width) * Maps[Level].TileHeight;
                         var tilesetRec = new Rectangle(TileWidth * column, TileHeight * row, TileWidth, TileHeight);
                         spriteBatch.Draw(Tileset, new Rectangle((int)x, (int)y, TileWidth, TileHeight), tilesetRec, Color.White);
                     }
                 }
             }
+            spriteBatch.Draw(Finish, new Vector2(FinishRectangle.X, FinishRectangle.Y), new Rectangle(0, 0, 50, 50), Color.White, 0f, new Vector2(25,25), 1.25f, SpriteEffects.None, 0f);
         }
 
         public void GetCollisionsObjects()
         {
             CollisionObjects = new List<Rectangle>();
-            foreach (var obj in Map.ObjectGroups["collisions"].Objects)
+            DeathRectangles = new List<Rectangle>();
+            SurfaceRectangles = new List<Rectangle>();
+            foreach (var obj in Maps[Level].ObjectGroups["collisions"].Objects)
             {
-                if (obj.Name == "")
+                var rectangle = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
+                switch (obj.Name)
                 {
-                    CollisionObjects.Add(new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height));
-                }
-                if (obj.Name == "start")
-                {
-                    StartPosition = new Vector2((int)obj.X, (int)obj.Y);
-                }
-                if (obj.Name == "death")
-                {
-                    DeathRectangle = new Rectangle((int)obj.X, (int)obj.Y, (int)obj.Width, (int)obj.Height);
-                    CollisionObjects.Add(DeathRectangle);
+                    case "":
+                        CollisionObjects.Add(rectangle);
+                        break;
+                    case "start":
+                        StartPosition = new Vector2((int)obj.X, (int)obj.Y);
+                        break;
+                    case "finish":
+                        FinishRectangle = rectangle;
+                        break;
+                    case "death":
+                        DeathRectangles.Add(rectangle);
+                        CollisionObjects.Add(rectangle);
+                        break;
+                    case "surface":
+                        SurfaceRectangles.Add(rectangle);
+                        break;
                 }
             }
         }

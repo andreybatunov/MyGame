@@ -156,3 +156,10 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOver.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameOverReturn.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\bubbleSheet.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\finishFlag.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\map1.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\map2.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level1.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\newTileset.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level2.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level3.tmx

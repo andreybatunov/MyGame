@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Security.Policy;
 using Tetris_Adventures.Images;
 using Tetris_Adventures.Managers;
 
@@ -21,6 +22,7 @@ namespace Tetris_Adventures.Objects
         public Direction Direction = Direction.Right;
         public TilemapManager TilemapManager;
         public bool IsAlive = true;
+        public bool IsReachedFinish = false;
 
 
         public Animation[] playerAnimation;
@@ -69,21 +71,14 @@ namespace Tetris_Adventures.Objects
             StartY = Position.Y;
             Jump(keyboard, gameTime, initPosition);
 
-            Hitbox.X = Direction == Direction.Right
-                ? (int)Position.X
-                : (int)Position.X - 3;
-            Hitbox.Y = (int)Position.Y - 3;
-            PlayerFallRectangle.X = (int)Position.X;
-            PlayerFallRectangle.Y = (int)Velocity.Y + 39;
-            PlayerJumpRectangle.X = (int)Position.X;
-            PlayerJumpRectangle.Y = (int)Velocity.Y;
+            UpdateHitboxes();
             GetCollisions(initPosition);
             Position = Velocity;
         }
 
         public void GetCollisions(Vector2 initPosition)
         {
-            foreach (var rectangle in TilemapManager.CollisionObjects)
+            foreach (var rectangle in TilemapManager.SurfaceRectangles)
             {
                 if (rectangle.Intersects(PlayerFallRectangle))
                 {
@@ -96,7 +91,7 @@ namespace Tetris_Adventures.Objects
                 }
 
             }
-            foreach (var rectangle in TilemapManager.CollisionObjects)
+            foreach (var rectangle in TilemapManager.SurfaceRectangles)
             {
                 if (rectangle.Intersects(Hitbox))
                 {
@@ -105,17 +100,23 @@ namespace Tetris_Adventures.Objects
                     break;
                 }
             }
-            foreach (var rectangle in TilemapManager.CollisionObjects)
+            foreach (var rectangle in TilemapManager.SurfaceRectangles)
             {
                 if (rectangle.Intersects(PlayerJumpRectangle))
                 {
                     IsJumping = false;
                 }
             }
-
-            if (TilemapManager.DeathRectangle.Intersects(PlayerFallRectangle))
+            foreach (var rectangle in TilemapManager.DeathRectangles)
             {
-                IsAlive = false;
+                if (rectangle.Intersects(PlayerFallRectangle))
+                {
+                    IsAlive = false;
+                }
+            }
+            if (TilemapManager.FinishRectangle.Intersects(Hitbox))
+            {
+                IsReachedFinish = true;
             }
         }
 
@@ -187,6 +188,18 @@ namespace Tetris_Adventures.Objects
                     JumpDelay = gameTime.TotalGameTime.TotalMilliseconds;
                 }
             }
+        }
+
+        public void UpdateHitboxes()
+        {
+            Hitbox.X = Direction == Direction.Right
+                ? (int)Position.X
+                : (int)Position.X - 3;
+            Hitbox.Y = (int)Position.Y - 3;
+            PlayerFallRectangle.X = (int)Position.X;
+            PlayerFallRectangle.Y = (int)Velocity.Y + 39;
+            PlayerJumpRectangle.X = (int)Position.X;
+            PlayerJumpRectangle.Y = (int)Velocity.Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)

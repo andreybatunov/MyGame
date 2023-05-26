@@ -58,23 +58,28 @@ namespace Tetris_Adventures.Menus
             }
             if (keyboard.IsKeyDown(Keys.Enter))
             {
-                switch (CurrentOption.Option)
-                {
-                    case MenuOptions.Game:
-                        MenuManager.GameState = GameStates.Game;
-                        MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
-                        break;
-                    case MenuOptions.HowToPlay:
-                        MenuManager.LastGameState = GameStates.Pause;
-                        MenuManager.GameState = GameStates.HowToPlay;
-                        break;
-                    case MenuOptions.Exit:
-                        MenuManager.GameState = GameStates.Menu;
-                        MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
-                        CurrentOption.Option = MenuOptions.Game;
-                        ResetLevelAfterExit = true;
-                        break;
-                }
+                MakeResponse(CurrentOption, gameTime);
+            }
+        }
+
+        public void MakeResponse(MenuOption option, GameTime gameTime)
+        {
+            switch (option.Option)
+            {
+                case MenuOptions.Game:
+                    MenuManager.GameState = GameStates.Game;
+                    MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                    break;
+                case MenuOptions.HowToPlay:
+                    MenuManager.LastGameState = GameStates.Pause;
+                    MenuManager.GameState = GameStates.HowToPlay;
+                    break;
+                case MenuOptions.Exit:
+                    MenuManager.GameState = GameStates.Menu;
+                    MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                    CurrentOption.Option = MenuOptions.Game;
+                    ResetLevelAfterExit = true;
+                    break;
             }
         }
 

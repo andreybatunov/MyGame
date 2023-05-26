@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using Tetris_Adventures.Managers;
 using Tetris_Adventures.Menus;
 using Tetris_Adventures.Objects;
@@ -19,9 +20,15 @@ namespace Tetris_Adventures
         private Texture2D tetrisSprite;
         #endregion
         #region Tilemaps
-        private TmxMap map;
+        private TmxMap map1;
+        private TmxMap map2;
+        private TmxMap map3;
+        private TmxMap map4;
+        private TmxMap map5;
+        private List<TmxMap> maps = new();
         private Texture2D tileset;
         private TilemapManager tilemapManager;
+        private Texture2D finishFlag;
         #endregion
         #region Player
         private Player player;
@@ -98,10 +105,15 @@ namespace Tetris_Adventures
             #endregion
 
             #region Tilemap
-            map = new TmxMap("Content\\map.tmx");
-            tileset = Content.Load<Texture2D>("tileset");
+            map1 = new TmxMap("Content\\level1.tmx");
+            map2 = new TmxMap("Content\\level2.tmx");
+            map3 = new TmxMap("Content\\level3.tmx");
 
-            tilemapManager = new TilemapManager(map, tileset);
+            maps = new List<TmxMap> { map1, map2, map3 };
+            tileset = Content.Load<Texture2D>("newTileset");
+            finishFlag = Content.Load<Texture2D>("finishFlag");
+
+            tilemapManager = new TilemapManager(maps, tileset, finishFlag);
             #endregion
 
             #region Player
@@ -125,7 +137,7 @@ namespace Tetris_Adventures
             gameOverSheet = Content.Load<Texture2D>("gameOver");
             gameOverReturnSheet = Content.Load<Texture2D>("gameOverReturn");
             bubbleSheet = Content.Load<Texture2D>("bubbleSheet");
-            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
+            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
             #endregion
 
             #region Menu
@@ -177,10 +189,12 @@ namespace Tetris_Adventures
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.White);
             spriteBatch.Begin();
             switch (menuManager.GameState)
             {
                 case GameStates.Game:
+                    GraphicsDevice.Clear(tilemapManager.Colors[tilemapManager.Level]);
                     tilemapManager.Draw(spriteBatch);
                     if (!uiManager.GameOverStatus)
                     {
@@ -205,10 +219,10 @@ namespace Tetris_Adventures
 
         private void ResetLevel()
         {
-            tilemapManager = new TilemapManager(map, tileset);
+            tilemapManager = new TilemapManager(maps, tileset, finishFlag);
             player = new Player(tilemapManager, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
             tetrisManager = new TetrisManager(tetrisSprite, tilemapManager, player);
-            uiManager = new UIManager(menuManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
+            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
             pausePage.ResetLevelAfterExit = false;
         }
     }

@@ -183,7 +183,7 @@ namespace Tetris_Adventures.Managers
 
         #region TetrisCanBeSetted
 
-        public bool CanCurrentObjectBeSetted(GameTime gameTime) => !IsGroundOfOtherFiguresIntersected() && !IsPlayerHitboxIntersected() && IsTouchingOtherFigure() && IsDelayPassed(gameTime, CurrentTetrisObject.Figure);
+        public bool CanCurrentObjectBeSetted(GameTime gameTime) => !IsGroundOfOtherFiguresIntersected() && !IsPlayerHitboxIntersected() && IsTouchingOtherFigureOrSurface() && IsDelayPassed(gameTime, CurrentTetrisObject.Figure);
 
         public bool IsPlayerHitboxIntersected()
         {
@@ -211,10 +211,23 @@ namespace Tetris_Adventures.Managers
             return false;
         }
 
-        public bool IsTouchingOtherFigure()
+        public bool IsTouchingOtherFigureOrSurface()
         {
             var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
-            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || DrawnFigures.Count == 0;
+            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || IsTouchingSurface();
+        }
+
+        public bool IsTouchingSurface()
+        {
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            foreach (var square in squares)
+            {
+                foreach (var obj in MapManager.SurfaceRectangles)
+                {
+                    if (square.Intersects(obj)) return true;
+                }
+            }
+            return false;
         }
 
         public bool IsDelayPassed(GameTime gameTime, TetrisFigure tetrisFigure) 
@@ -262,6 +275,7 @@ namespace Tetris_Adventures.Managers
         public void ClearMap()
         {
             MapManager.CollisionObjects.RemoveRange(MapManager.CollisionObjects.Count - DrawnFigures.Count * 4, DrawnFigures.Count * 4);
+            MapManager.SurfaceRectangles.RemoveRange(MapManager.SurfaceRectangles.Count - DrawnFigures.Count * 4, DrawnFigures.Count * 4);
             DrawnFigures.Clear();
             EnvironmentTetrisSquares.Clear();
             foreach (var obj in DelaysDictionary)
@@ -273,6 +287,7 @@ namespace Tetris_Adventures.Managers
         public void AddTetrisObject(List<Rectangle> possibleObject)
         {
             MapManager.CollisionObjects.AddRange(possibleObject);
+            MapManager.SurfaceRectangles.AddRange(possibleObject);
             DrawnFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
             EnvironmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
         }
