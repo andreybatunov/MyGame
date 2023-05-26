@@ -17,10 +17,10 @@ namespace Tetris_Adventures.Managers
         public List<Color> Colors = new()
         {
             Color.Aquamarine,
-            Color.DarkBlue,
-            Color.Magenta,
-            Color.Orange,
-            Color.Orchid,
+            Color.CadetBlue,
+            Color.SteelBlue,
+            Color.MidnightBlue,
+            Color.DimGray,
         };
         public TilemapManager(List<TmxMap> maps, Texture2D tileset, Texture2D finish)
         {

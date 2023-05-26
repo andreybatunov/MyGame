@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="10">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="14">
  <tileset firstgid="1" name="newTileset" tilewidth="32" tileheight="32" tilecount="832" columns="32">
   <image source="newTileset.png" width="1024" height="832"/>
   <tile id="0"/>
@@ -1068,13 +1068,17 @@
 </data>
  </layer>
  <objectgroup id="11" name="collisions">
-  <object id="2" x="1.77636e-15" y="618" width="510.667" height="182.242"/>
-  <object id="3" x="992.667" y="520.5" width="446.833" height="279.333"/>
-  <object id="4" x="7" y="-44.6667" width="1431.33" height="46"/>
-  <object id="5" x="-90" y="2.33333" width="97.3333" height="605"/>
-  <object id="6" x="1433" y="4.33333" width="74" height="513.333"/>
-  <object id="7" name="death" x="514.045" y="768.25" width="476.955" height="31.375"/>
-  <object id="8" name="finish" x="1404.67" y="485.333"/>
+  <object id="2" x="1.77636e-15" y="633" width="484.834" height="167.242"/>
+  <object id="3" x="1015.17" y="537.167" width="424.333" height="262.666"/>
+  <object id="4" name="surface" x="-100.333" y="-101.667" width="1650" height="46"/>
+  <object id="5" name="surface" x="-97.5" y="-43" width="25.8333" height="650.333"/>
+  <object id="6" name="surface" x="1514" y="-37" width="31.3333" height="554.666"/>
+  <object id="7" name="death" x="514.045" y="770.5" width="476.955" height="29.125"/>
+  <object id="8" name="finish" x="1404.67" y="487.333"/>
   <object id="9" name="start" x="39" y="568.5"/>
+  <object id="10" name="surface" x="-70.1667" y="609" width="578.94" height="20"/>
+  <object id="11" name="surface" x="489.985" y="637.758" width="20.2424" height="129.06"/>
+  <object id="12" name="surface" x="991.75" y="538.5" width="20.25" height="227.25"/>
+  <object id="13" name="surface" x="999" y="515" width="510" height="20"/>
  </objectgroup>
 </map>

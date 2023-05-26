@@ -45,6 +45,10 @@ namespace Tetris_Adventures
         private Texture2D gameOverSheet;
         private Texture2D gameOverReturnSheet;
         private Texture2D bubbleSheet;
+        private Texture2D missionCompleted;
+        private Texture2D missionCompletedReturn;
+        private Texture2D levelTitle;
+        private Texture2D levelNumbers;
         #endregion
 
         #region Menu
@@ -108,8 +112,10 @@ namespace Tetris_Adventures
             map1 = new TmxMap("Content\\level1.tmx");
             map2 = new TmxMap("Content\\level2.tmx");
             map3 = new TmxMap("Content\\level3.tmx");
+            map4 = new TmxMap("Content\\level4.tmx");
+            map5 = new TmxMap("Content\\level5.tmx");
 
-            maps = new List<TmxMap> { map1, map2, map3 };
+            maps = new List<TmxMap> { map1, map2, map3, map4, map5  };
             tileset = Content.Load<Texture2D>("newTileset");
             finishFlag = Content.Load<Texture2D>("finishFlag");
 
@@ -137,7 +143,12 @@ namespace Tetris_Adventures
             gameOverSheet = Content.Load<Texture2D>("gameOver");
             gameOverReturnSheet = Content.Load<Texture2D>("gameOverReturn");
             bubbleSheet = Content.Load<Texture2D>("bubbleSheet");
-            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
+            missionCompleted = Content.Load<Texture2D>("missionPassed");
+            missionCompletedReturn = Content.Load<Texture2D>("gameCompletedSheet");
+            levelTitle = Content.Load<Texture2D>("levelSheet");
+            levelNumbers = Content.Load<Texture2D>("levelNumbers");
+            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, 
+                numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
             #endregion
 
             #region Menu
@@ -222,7 +233,8 @@ namespace Tetris_Adventures
             tilemapManager = new TilemapManager(maps, tileset, finishFlag);
             player = new Player(tilemapManager, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
             tetrisManager = new TetrisManager(tetrisSprite, tilemapManager, player);
-            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet);
+            uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player,
+                numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
             pausePage.ResetLevelAfterExit = false;
         }
     }

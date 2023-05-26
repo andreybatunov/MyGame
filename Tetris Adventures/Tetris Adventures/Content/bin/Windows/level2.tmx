@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="15">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="22">
  <tileset firstgid="1" name="newTileset" tilewidth="32" tileheight="32" tilecount="832" columns="32">
   <image source="newTileset.png" width="1024" height="832"/>
  </tileset>
@@ -132,7 +132,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,62,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,351,352,0,0,0,0,0,0,0,0,0,0,0,94,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,383,384,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,649,650,651,652,0,0,0,0,463,464,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -265,15 +265,22 @@
 </data>
  </layer>
  <objectgroup id="11" name="collisions">
-  <object id="1" x="0.333333" y="681.333" width="222" height="118.667"/>
+  <object id="1" x="0.333333" y="695.583" width="200" height="104.417"/>
   <object id="2" name="death" x="223.706" y="768.464" width="1053.92" height="31.5455"/>
-  <object id="3" x="1279.5" y="169.667" width="159.833" height="629.5"/>
-  <object id="4" x="511.333" y="0.5" width="349.167" height="477.333"/>
-  <object id="7" x="-7.66667" y="3" width="11.6667" height="676"/>
-  <object id="10" x="7.16667" y="-15.8333" width="495.833" height="20.1667"/>
-  <object id="11" name="finish" x="1405" y="133.333"/>
-  <object id="12" name="start" x="32" y="642"/>
-  <object id="13" x="864.25" y="-15.25" width="575.833" height="20.1667"/>
-  <object id="14" x="1438.17" y="7.36364" width="10.7273" height="159.909"/>
+  <object id="3" x="1302.5" y="188.167" width="136.833" height="611"/>
+  <object id="4" x="533.833" y="0.5" width="305.667" height="455.333"/>
+  <object id="7" name="surface" x="-100.667" y="-51" width="11.6667" height="730"/>
+  <object id="10" name="surface" x="-112.833" y="-87.8333" width="615.833" height="20.1667"/>
+  <object id="11" name="finish" x="1408" y="135.333"/>
+  <object id="12" name="start" x="32" y="627"/>
+  <object id="13" name="surface" x="864.25" y="-95.25" width="675.833" height="20.1667"/>
+  <object id="14" name="surface" x="1527.17" y="-56.6364" width="10.7273" height="223.909"/>
+  <object id="15" name="surface" x="1280" y="187.5" width="20.25" height="581.25"/>
+  <object id="16" name="surface" x="1280.75" y="165.75" width="240.667" height="20"/>
+  <object id="17" name="surface" x="511.75" y="-85" width="20.5" height="555.5"/>
+  <object id="18" name="surface " x="534.25" y="458" width="311.25" height="20"/>
+  <object id="19" name="surface " x="840.75" y="-92.3333" width="20.75" height="548.583"/>
+  <object id="20" name="surface" x="-82.5" y="673" width="302" height="20.75"/>
+  <object id="21" name="surface" x="201.75" y="696" width="20.25" height="71"/>
  </objectgroup>
 </map>

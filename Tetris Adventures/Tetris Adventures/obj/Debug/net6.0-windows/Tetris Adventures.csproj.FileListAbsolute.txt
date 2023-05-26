@@ -99,7 +99,6 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\map.tsx
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\Scaffolding_and_BG_Parts (16 x 16).xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\_Complete_static_BG_(288 x 208).xnb
-D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\tileset.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\idleSprite.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\fallingSprite.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\jumpingSprite.xnb
@@ -163,3 +162,9 @@ D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\newTileset.xnb
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level2.tmx
 D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level3.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level4.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\level5.tmx
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\gameCompletedSheet.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\levelSheet.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\missionPassed.xnb
+D:\TA Repos\MyGame\Tetris Adventures\Tetris Adventures\bin\Debug\net6.0-windows\Content\levelNumbers.xnb

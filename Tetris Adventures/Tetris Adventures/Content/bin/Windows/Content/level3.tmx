@@ -186,7 +186,7 @@
   <object id="6" name=" surface" x="-70.8333" y="-107" width="491.833" height="27"/>
   <object id="7" name="surface" x="979.5" y="-94.5" width="504" height="14"/>
   <object id="8" name="surface" x="1487.83" y="-88" width="11.5" height="189.333"/>
-  <object id="9" name="finish" x="1378.5" y="72"/>
+  <object id="9" name="finish" x="1379.5" y="74"/>
   <object id="10" name="start" x="41.5" y="146"/>
   <object id="11" name="death" x="415" y="321.333" width="574.333" height="29.6667"/>
   <object id="12" name="surface" x="584" y="709.083" width="206.333" height="19.5"/>

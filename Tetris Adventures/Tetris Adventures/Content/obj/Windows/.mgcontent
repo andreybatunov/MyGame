@@ -5,17 +5,21 @@
   <Config />
   <SourceFiles>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/bubbleSheet.png</File>
+    <File>C:/Users/ondru/OneDrive/Рабочий стол/GameContent/missionPassed.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/continueSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/exit.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/fallingSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/finishFlag.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/Font.spritefont</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/gameCompletedSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/gameOver.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/gameOverReturn.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/howToPlay.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/idleSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/Instructions.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/jumpingSprite.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/levelNumbers.png</File>
+    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/levelSheet.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/mainMenuLogo.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/menuBackground.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/newGame.png</File>
@@ -28,9 +32,11 @@
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/runningSpritePlayer.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/spawningSprite.png</File>
     <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tetrisFigures.png</File>
-    <File>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File>missionPassed.png</File>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

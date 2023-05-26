@@ -249,6 +249,14 @@ namespace Tetris_Adventures.Managers
                 }
             }
         }
+
+        public void ResetDelays()
+        {
+            foreach (var obj in DelaysDictionary)
+            {
+                    DelaysDictionary[obj.Key] = (0, true);
+            }
+        }
         #endregion
 
         public List<Rectangle> GetEnvironmentSquares(List<Rectangle> squaresList)

@@ -1074,7 +1074,7 @@
   <object id="5" name="surface" x="-97.5" y="-43" width="25.8333" height="650.333"/>
   <object id="6" name="surface" x="1514" y="-37" width="31.3333" height="554.666"/>
   <object id="7" name="death" x="514.045" y="770.5" width="476.955" height="29.125"/>
-  <object id="8" name="finish" x="1404.67" y="485.333"/>
+  <object id="8" name="finish" x="1404.67" y="487.333"/>
   <object id="9" name="start" x="39" y="568.5"/>
   <object id="10" name="surface" x="-70.1667" y="609" width="578.94" height="20"/>
   <object id="11" name="surface" x="489.985" y="637.758" width="20.2424" height="129.06"/>

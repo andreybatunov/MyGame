@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/finishFlag.png</SourceFile>
-  <SourceTime>2023-05-26T01:18:06.1225638+05:00</SourceTime>
+  <SourceTime>2023-05-27T01:53:06.964671+05:00</SourceTime>
   <DestFile>D:/TA Repos/MyGame/Tetris Adventures/Tetris Adventures/Content/bin/Windows/finishFlag.xnb</DestFile>
-  <DestTime>2023-05-26T20:27:59.0161834+05:00</DestTime>
+  <DestTime>2023-05-27T03:00:48.6335807+05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T16:44:56+05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
