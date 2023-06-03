@@ -9,24 +9,25 @@ namespace Tetris_Adventures.Menus
 {
     public class InstructionsPage
     {
-        public Texture2D MenuBackground;
-        public Texture2D Logo;
-        public Texture2D InstructionsSheet;
         public MenuManager MenuManager { get; set; }
 
+        private readonly Texture2D menuBackground;
+        private readonly Texture2D logo;
+        private readonly Texture2D instructionsSheet;
+        
         public InstructionsPage(MenuManager menuManager, Texture2D menuBackground, Texture2D logo, Texture2D instructionsSheet) 
         {
             MenuManager = menuManager;
-            MenuBackground = menuBackground;
-            Logo = logo;
-            InstructionsSheet = instructionsSheet;
+            this.menuBackground = menuBackground;
+            this.logo = logo;
+            this.instructionsSheet = instructionsSheet;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(MenuBackground, new Rectangle(0, 0, 1440, 800), Color.White);
-            spriteBatch.Draw(Logo, new Vector2(50, 10), new Rectangle(0, 0, 480, 160), Color.White);
-            spriteBatch.Draw(InstructionsSheet, new Vector2(50, 200), new Rectangle(0, 0, 708, 417), Color.White);
+            spriteBatch.Draw(menuBackground, new Rectangle(0, 0, 1440, 800), Color.White);
+            spriteBatch.Draw(logo, new Vector2(50, 10), new Rectangle(0, 0, 480, 160), Color.White);
+            spriteBatch.Draw(instructionsSheet, new Vector2(50, 200), new Rectangle(0, 0, 708, 417), Color.White);
         }
 
         public void Update(GameTime gameTime)

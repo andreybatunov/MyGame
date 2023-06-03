@@ -2,57 +2,59 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
-using System.Security.Policy;
 using Tetris_Adventures.Objects;
 
 namespace Tetris_Adventures.Managers
 {
     public class UIManager
     {
-        public MenuManager MenuManager { get; set; }
-        public int Timer;
-        public int FirstPos;
-        public int SecondPos;
-        public int ThirdPos;
-        public List<Rectangle> NumberRectangles;
-        public Texture2D NumbersSheet;
-        public Texture2D GameOverSheet;
-        public Texture2D GameOverReturnSheet;
-        public Texture2D TetrisFiguresSheet;
-        public Texture2D BubbleSheet;
-        public Texture2D MissionCompletedSheet;
-        public Texture2D MissionCompletedReturnSheet;
-        public Texture2D LevelTitle;
-        public Texture2D LevelNumbers;
-        public TetrisManager TetrisManager;
-        public TilemapManager TilemapManager;
-        public Player Player;
-        public bool GameOverStatus;
-        public bool GameCompleted;
+        private const int delay = 200;
+
+        public bool GameOverStatus { get; set; }
+        public bool GameCompleted { get; set; }
         public bool ResetLevelAfterGameOver = false;
-        public bool CurrentLevelComplited;
+        public bool CurrentLevelCompleted;
         public int TetrisPointer = 1;
 
+        private readonly int levelTime;
+        private readonly Texture2D numbersSheet;
+        private readonly Texture2D gameOverSheet;
+        private readonly Texture2D gameOverReturnSheet;
+        private readonly Texture2D bubbleSheet;
+        private readonly Texture2D missionCompletedSheet;
+        private readonly Texture2D missionCompletedReturnSheet;
+        private readonly Texture2D levelTitle;
+        private readonly Texture2D levelNumbers;
+
+        private int timer;
+        private int firstPos;
+        private int secondPos;
+        private int thirdPos;
+        private TetrisManager tetrisManager;
+        private TilemapManager tilemapManager;
+        private Player player;
+        private MenuManager menuManager;
+        
         public UIManager(MenuManager menuManager, TilemapManager tilemapManager, TetrisManager tetrisManager, Player player, 
-            Texture2D numbersSheet, Texture2D gameOverSheet, Texture2D gameOverReturnSheet, Texture2D tetrisFigures, 
+            Texture2D numbersSheet, Texture2D gameOverSheet, Texture2D gameOverReturnSheet, 
             Texture2D bubble, Texture2D missionCompleted, Texture2D missionComlReturn, Texture2D level, Texture2D levelNumbers) 
         {
-            MenuManager = menuManager;
-            TilemapManager = tilemapManager;
-            TetrisManager = tetrisManager;
-            Player = player;
+            this.menuManager = menuManager;
+            this.tilemapManager = tilemapManager;
+            this.tetrisManager = tetrisManager;
+            this.player = player;
             GameOverStatus = false;
             GameCompleted = false;
-            Timer = 3600;
-            NumbersSheet = numbersSheet;
-            GameOverSheet = gameOverSheet;
-            GameOverReturnSheet = gameOverReturnSheet;
-            TetrisFiguresSheet = tetrisFigures;
-            BubbleSheet = bubble;
-            MissionCompletedSheet = missionCompleted;
-            MissionCompletedReturnSheet = missionComlReturn;
-            LevelTitle = level;
-            LevelNumbers = levelNumbers;
+            levelTime = 3600;
+            timer = levelTime;
+            this.numbersSheet = numbersSheet;
+            this.gameOverSheet = gameOverSheet;
+            this.gameOverReturnSheet = gameOverReturnSheet;
+            bubbleSheet = bubble;
+            missionCompletedSheet = missionCompleted;
+            missionCompletedReturnSheet = missionComlReturn;
+            levelTitle = level;
+            this.levelNumbers = levelNumbers;
         }
 
         public void Update(GameTime gameTime)
@@ -63,13 +65,13 @@ namespace Tetris_Adventures.Managers
             }
             var keyboard = Keyboard.GetState();
             GetHandleInput(keyboard, gameTime);
-            if (Timer == 0 || !Player.IsAlive)
+            if (timer == 0 || !player.IsAlive)
             {
                 GameOverStatus = true;
             }
-             if (Player.IsReachedFinish)
+             if (player.IsReachedFinish)
             {
-                if (TilemapManager.Level == 4)
+                if (tilemapManager.Level == 4)
                 {
                     GameCompleted = true;
                 }
@@ -83,18 +85,17 @@ namespace Tetris_Adventures.Managers
         public void GetHandleInput(KeyboardState keyboard, GameTime gameTime)
         {
             if (keyboard.IsKeyDown(Keys.Escape)
-                && gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - menuManager.JumpTimeCheck > delay)
             {
-                MenuManager.GameState = MenuManager.GameStates.Pause;
-                MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                menuManager.GameState = MenuManager.GameStates.Pause;
+                menuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
             if (keyboard.IsKeyDown(Keys.Enter) && (GameOverStatus || GameCompleted)
-                && gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > 200) 
+                && gameTime.TotalGameTime.TotalMilliseconds - menuManager.JumpTimeCheck > delay) 
             {
-                //GameOverStatus = false;
                 ResetLevelAfterGameOver = true;
-                MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
-                MenuManager.GameState = MenuManager.GameStates.Menu;
+                menuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                menuManager.GameState = MenuManager.GameStates.Menu;
             }
         }
 
@@ -118,44 +119,44 @@ namespace Tetris_Adventures.Managers
 
         public void TimerCountDown()
         {
-            if (Timer % 60 == 0)
+            if (timer % 60 == 0)
             {
-                ThirdPos = Timer / 60 % 10;
-                SecondPos = Timer / 60 / 10 % 6;
-                FirstPos = Timer / 3600;
+                thirdPos = timer / 60 % 10;
+                secondPos = timer / 60 / 10 % 6;
+                firstPos = timer / 3600;
             }
-            if (Timer != 0)
+            if (timer != 0)
             {
-                Timer--;
+                timer--;
             }
         }
 
         public void DrawCountDown(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(NumbersSheet, new Vector2(1405, 20), new Rectangle(29 * ThirdPos, 0, 29, 38), Timer <= 900 ? Color.Red : Color.White);
-            spriteBatch.Draw(NumbersSheet, new Vector2(1374, 20), new Rectangle(29 * SecondPos, 0, 29, 38), Timer <= 900 ? Color.Red : Color.White);
-            spriteBatch.Draw(NumbersSheet, new Vector2(1361, 30), new Rectangle(290, 0, 9, 38), Timer <= 900 ? Color.Red : Color.White);
-            spriteBatch.Draw(NumbersSheet, new Vector2(1334, 20), new Rectangle(29 * FirstPos, 0, 29, 38), Timer <= 900 ? Color.Red : Color.White);
+            spriteBatch.Draw(numbersSheet, new Vector2(1405, 20), new Rectangle(29 * thirdPos, 0, 29, 38), timer <= 900 ? Color.Red : Color.White);
+            spriteBatch.Draw(numbersSheet, new Vector2(1374, 20), new Rectangle(29 * secondPos, 0, 29, 38), timer <= 900 ? Color.Red : Color.White);
+            spriteBatch.Draw(numbersSheet, new Vector2(1361, 30), new Rectangle(290, 0, 9, 38), timer <= 900 ? Color.Red : Color.White);
+            spriteBatch.Draw(numbersSheet, new Vector2(1334, 20), new Rectangle(29 * firstPos, 0, 29, 38), timer <= 900 ? Color.Red : Color.White);
         }
 
         public void DrawGameOverTitle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(GameOverSheet, new Vector2(370, 320), new Rectangle(0, 0, 700, 83), Color.White);
-            spriteBatch.Draw(GameOverReturnSheet, new Vector2(507, 410), new Rectangle(0, 0, 427, 27), Color.White);
+            spriteBatch.Draw(gameOverSheet, new Vector2(370, 320), new Rectangle(0, 0, 700, 83), Color.White);
+            spriteBatch.Draw(gameOverReturnSheet, new Vector2(507, 410), new Rectangle(0, 0, 427, 27), Color.White);
         }
 
         public void DrawGameCompletedTitle(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(MissionCompletedSheet, new Vector2(480, 290), new Rectangle(0, 0, 480, 129), Color.White);
-            spriteBatch.Draw(MissionCompletedReturnSheet, new Vector2(507, 450), new Rectangle(0, 0, 427, 27), Color.White);
+            spriteBatch.Draw(missionCompletedSheet, new Vector2(480, 290), new Rectangle(0, 0, 480, 129), Color.White);
+            spriteBatch.Draw(missionCompletedReturnSheet, new Vector2(507, 450), new Rectangle(0, 0, 427, 27), Color.White);
         }
 
         public void DrawLevelTitle(SpriteBatch spriteBatch)
         {
-            if (Timer > 3420)
+            if (timer > levelTime * 0.95)
             {
-                spriteBatch.Draw(LevelTitle, new Vector2(520, 320), Color.White);
-                spriteBatch.Draw(LevelNumbers, new Vector2(850, 332), new Rectangle((TilemapManager.Level) * 75, 0, 75, 101), Color.White);
+                spriteBatch.Draw(levelTitle, new Vector2(520, 320), Color.White);
+                spriteBatch.Draw(levelNumbers, new Vector2(850, 332), new Rectangle((tilemapManager.Level) * 75, 0, 75, 101), Color.White);
             }
         }
 
@@ -172,28 +173,25 @@ namespace Tetris_Adventures.Managers
 
         public void DrawInventoryBubble(SpriteBatch spriteBatch,TetrisManager.TetrisFigure tetrisFigure, Vector2 position, int number)
         {
-            var figureOrigin = new Vector2(TetrisManager.Shapes[tetrisFigure].Width / 2, TetrisManager.Shapes[tetrisFigure].Height / 2);
+            var figureOrigin = new Vector2(tetrisManager.Shapes[tetrisFigure].Width / 2, tetrisManager.Shapes[tetrisFigure].Height / 2);
             var numberPosition = new Vector2(position.X - 35, position.Y + 55);
-            spriteBatch.Draw(BubbleSheet, position, new Rectangle(0, 0, 100, 100), Color.White, 0f, new Vector2(50, 50),
-                TetrisManager.CurrentTetrisObject.Figure == tetrisFigure ? 1.5f : 1f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(TetrisManager.TetrisSpriteSheet, position, TetrisManager.Shapes[tetrisFigure],
-                TetrisManager.DelaysDictionary[tetrisFigure].Item2 ? Color.GhostWhite : Color.Black, 0f, figureOrigin,
-                 TetrisManager.CurrentTetrisObject.Figure == tetrisFigure ? 1f : 0.5f, SpriteEffects.None, 0f);
-            spriteBatch.Draw(NumbersSheet, numberPosition, new Rectangle(29 * number, 0, 29, 38), Color.White, 0f, new Vector2(15, 19), 0.5f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(bubbleSheet, position, new Rectangle(0, 0, 100, 100), Color.White, 0f, new Vector2(50, 50),
+                tetrisManager.CurrentTetrisObject.Figure == tetrisFigure ? 1.5f : 1f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(tetrisManager.TetrisSpriteSheet, position, tetrisManager.Shapes[tetrisFigure],
+                tetrisManager.DelaysDictionary[tetrisFigure].Item2 ? Color.GhostWhite : Color.Black, 0f, figureOrigin,
+                 tetrisManager.CurrentTetrisObject.Figure == tetrisFigure ? 1f : 0.5f, SpriteEffects.None, 0f);
+            spriteBatch.Draw(numbersSheet, numberPosition, new Rectangle(29 * number, 0, 29, 38), Color.White, 0f, new Vector2(15, 19), 0.5f, SpriteEffects.None, 0f);
         }
 
         public void GoToNextLevel()
         {
-            TilemapManager.Level += 1;
-            TilemapManager.GetCollisionsObjects();
-            TetrisManager.DrawnFigures.Clear();
-            TetrisManager.EnvironmentTetrisSquares.Clear();
-            TetrisManager.ResetDelays();
-            Player.Velocity = TilemapManager.StartPosition;
-            Player.Position = TilemapManager.StartPosition;
-            Player.IsReachedFinish = false;
-            Timer = 3600;
-            
+            tetrisManager.ClearMap();
+            tilemapManager.Level += 1;
+            tilemapManager.GetCollisionsObjects();
+            player.Velocity = tilemapManager.StartPosition;
+            player.Position = tilemapManager.StartPosition;
+            player.IsReachedFinish = false;
+            timer = 3600;
         }
     }
 }

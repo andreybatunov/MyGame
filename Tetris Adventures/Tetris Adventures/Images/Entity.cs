@@ -5,7 +5,6 @@ namespace Tetris_Adventures.Images
 {
     public abstract class Entity
     {
-        public Texture2D SpriteSheet;
         public Vector2 Position;
         public Rectangle Hitbox;
 

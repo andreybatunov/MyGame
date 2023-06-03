@@ -7,24 +7,25 @@ using Tetris_Adventures.Objects;
 namespace Tetris_Adventures.Menus
 {
     public class MainPage : MenuManager
-    { 
-        public MenuOption CurrentOption;
-        public Texture2D MenuBackground;
-        public Texture2D Logo;
-        public Texture2D NewGameSheet;
-        public Texture2D HowToPlaySheet;
-        public Texture2D ExitSheet;
-        public double ChangeOptionCheck;
-        public MenuManager MenuManager { get; set; }
+    {
+        private const int delay = 200;
+        private readonly Texture2D menuBackground;
+        private readonly Texture2D logo;
+        private readonly Texture2D newGameSheet;
+        private readonly Texture2D howToPlaySheet;
+        private readonly Texture2D exitSheet;
+        private MenuOption currentOption;
+        private double changeOptionCheck;
+        private MenuManager MenuManager { get; set; }
 
         public MainPage(MenuManager menuManager, Texture2D menuBackground, Texture2D logo, Texture2D newGameSheet, Texture2D howToPlaySheet, Texture2D exitSheet)
         {
-            NewGameSheet = newGameSheet;
-            HowToPlaySheet = howToPlaySheet;
-            ExitSheet = exitSheet;
-            MenuBackground = menuBackground;
-            Logo = logo;
-            CurrentOption = new MenuOption();
+            this.newGameSheet = newGameSheet;
+            this.howToPlaySheet = howToPlaySheet;
+            this.exitSheet = exitSheet;
+            this.menuBackground = menuBackground;
+            this.logo = logo;
+            currentOption = new MenuOption();
             MenuManager = menuManager;
         }
 
@@ -37,26 +38,26 @@ namespace Tetris_Adventures.Menus
         public void GetHandleInput(KeyboardState keyboard, GameTime gameTime)
         {
             if (keyboard.IsKeyDown(Keys.Down) 
-                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - changeOptionCheck > delay)
             {
-                CurrentOption.Option = (MenuOptions)((int)(CurrentOption.Option + 1) % 3);
-                ChangeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                currentOption.Option = (MenuOptions)((int)(currentOption.Option + 1) % 3);
+                changeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
             if (keyboard.IsKeyDown(Keys.Up)
-                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - changeOptionCheck > delay)
             {
-                CurrentOption.Option = (MenuOptions)((int)(CurrentOption.Option + 2) % 3);
-                ChangeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                currentOption.Option = (MenuOptions)((int)(currentOption.Option + 2) % 3);
+                changeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
             if (keyboard.IsKeyDown(Keys.Enter))
             {
-                switch (CurrentOption.Option)
+                switch (currentOption.Option)
                 {
                     case MenuOptions.Exit:
                         MenuManager.GameState = GameStates.Exit;
                         break;
                     case MenuOptions.Game:
-                        if (gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > 200)
+                        if (gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > delay)
                         {
                             MenuManager.GameState = GameStates.Game;
                             MenuManager.JumpTimeCheck = 0;
@@ -72,11 +73,11 @@ namespace Tetris_Adventures.Menus
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(MenuBackground, new Rectangle(0, 0, 1440, 800), Color.White);
-            spriteBatch.Draw(Logo, new Vector2(50, 10), new Rectangle(0, 0, 480, 160), Color.White);
-            spriteBatch.Draw(NewGameSheet, new Vector2(50, 250), new Rectangle(0, 0, 304, 77), CurrentOption.Option == MenuOptions.Game ? Color.GhostWhite : Color.SlateGray);
-            spriteBatch.Draw(HowToPlaySheet, new Vector2(50, 320), new Rectangle(0, 0, 304, 77), CurrentOption.Option == MenuOptions.HowToPlay ? Color.GhostWhite : Color.SlateGray);
-            spriteBatch.Draw(ExitSheet, new Vector2(50, 390), new Rectangle(0, 0, 304, 77), CurrentOption.Option == MenuOptions.Exit ? Color.GhostWhite : Color.SlateGray);
+            spriteBatch.Draw(menuBackground, new Rectangle(0, 0, 1440, 800), Color.White);
+            spriteBatch.Draw(logo, new Vector2(50, 10), new Rectangle(0, 0, 480, 160), Color.White);
+            spriteBatch.Draw(newGameSheet, new Vector2(50, 250), new Rectangle(0, 0, 304, 77), currentOption.Option == MenuOptions.Game ? Color.GhostWhite : Color.SlateGray);
+            spriteBatch.Draw(howToPlaySheet, new Vector2(50, 320), new Rectangle(0, 0, 304, 77), currentOption.Option == MenuOptions.HowToPlay ? Color.GhostWhite : Color.SlateGray);
+            spriteBatch.Draw(exitSheet, new Vector2(50, 390), new Rectangle(0, 0, 304, 77), currentOption.Option == MenuOptions.Exit ? Color.GhostWhite : Color.SlateGray);
         }
     }
 }

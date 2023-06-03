@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using Tetris_Adventures.Objects;
-using MonoGame.Extended.Timers;
 
 namespace Tetris_Adventures.Managers
 {
     public class TetrisManager
     {
+        private const int delay = 200;
+        private const int setObjectDelay = 5000;
         public enum TetrisFigure
         {
             None,
@@ -22,39 +23,6 @@ namespace Tetris_Adventures.Managers
             TShape,
             SShape,
         }
-
-        public List<TetrisObject> DrawnFigures;
-        public Texture2D TetrisSpriteSheet;
-        public Dictionary<TetrisFigure, Rectangle> Shapes = new()
-            {
-                { TetrisFigure.None, new Rectangle(0, 0, 0, 0) },
-                { TetrisFigure.IShape, new Rectangle(0, 0, 20, 80) },
-                { TetrisFigure.JShape, new Rectangle(20, 0, 40, 60) },
-                { TetrisFigure.LShape, new Rectangle(60, 0, 40, 60) },
-                { TetrisFigure.OShape, new Rectangle(100, 0, 40, 40) },
-                { TetrisFigure.ZShape, new Rectangle(140, 0, 60, 40) },
-                { TetrisFigure.TShape, new Rectangle(200, 0, 60, 40) },
-                { TetrisFigure.SShape, new Rectangle(260, 0, 60, 40) },
-            };
-        public TetrisObject CurrentTetrisObject;
-        public Vector2 CurrentMousePosition;
-        public TilemapManager MapManager;
-        public Dictionary<Keys, TetrisFigure> KeyboardKeys = new()
-            {
-                {Keys.Q, TetrisFigure.None },
-                {Keys.D1, TetrisFigure.IShape },
-                {Keys.D2, TetrisFigure.JShape },
-                {Keys.D3, TetrisFigure.LShape },
-                {Keys.D4, TetrisFigure.OShape },
-                {Keys.D5, TetrisFigure.ZShape },
-                {Keys.D6, TetrisFigure.TShape },
-                {Keys.D7, TetrisFigure.SShape }
-            };
-        public double RotateTimeCheck = 0;
-        public double SetObjectTimeCheck = 0;
-        public static Vector2 DrawPos;
-        public Player Player;
-        public List<Rectangle> EnvironmentTetrisSquares;
         public Dictionary<TetrisFigure, (double, bool)> DelaysDictionary = new()
         {
             { TetrisFigure.None, (0, false) },
@@ -66,29 +34,63 @@ namespace Tetris_Adventures.Managers
             { TetrisFigure.TShape, (0, true)},
             { TetrisFigure.SShape, (0, true)},
         };
+        public Dictionary<TetrisFigure, Rectangle> Shapes = new()
+            {
+                { TetrisFigure.None, new Rectangle(0, 0, 0, 0) },
+                { TetrisFigure.IShape, new Rectangle(0, 0, 20, 80) },
+                { TetrisFigure.JShape, new Rectangle(20, 0, 40, 60) },
+                { TetrisFigure.LShape, new Rectangle(60, 0, 40, 60) },
+                { TetrisFigure.OShape, new Rectangle(100, 0, 40, 40) },
+                { TetrisFigure.ZShape, new Rectangle(140, 0, 60, 40) },
+                { TetrisFigure.TShape, new Rectangle(200, 0, 60, 40) },
+                { TetrisFigure.SShape, new Rectangle(260, 0, 60, 40) },
+            };
+        public TetrisObject CurrentTetrisObject { get; set; }
+        public Texture2D TetrisSpriteSheet { get; set; }
+
+        private List<TetrisObject> drawnFigures;
+        private Vector2 currentMousePosition;
+        private TilemapManager mapManager;
+        private readonly Dictionary<Keys, TetrisFigure> keyboardKeys = new()
+            {
+                {Keys.Q, TetrisFigure.None },
+                {Keys.D1, TetrisFigure.IShape },
+                {Keys.D2, TetrisFigure.JShape },
+                {Keys.D3, TetrisFigure.LShape },
+                {Keys.D4, TetrisFigure.OShape },
+                {Keys.D5, TetrisFigure.ZShape },
+                {Keys.D6, TetrisFigure.TShape },
+                {Keys.D7, TetrisFigure.SShape }
+            };
+        private double rotateTimeCheck;
+        private double setObjectTimeCheck;
+        private Vector2 drawPos;
+        private Player player;
+        private List<Rectangle> environmentTetrisSquares;
+        
 
         public TetrisManager(Texture2D tetrisSprite, TilemapManager tilemapManager, Player player)
         {
             TetrisSpriteSheet = tetrisSprite;
-            MapManager = tilemapManager;
+            mapManager = tilemapManager;
             CurrentTetrisObject = new TetrisObject(TetrisFigure.None, new Vector2(), new Rectangle());
-            DrawnFigures = new List<TetrisObject>();
-            EnvironmentTetrisSquares = new List<Rectangle>();
-            Player = player;
+            drawnFigures = new List<TetrisObject>();
+            environmentTetrisSquares = new List<Rectangle>();
+            this.player = player;
         }
 
         public void Update(GameTime gameTime)
         {
             var mouse = Mouse.GetState();
             var keyboard = Keyboard.GetState();
-            CurrentMousePosition.X = mouse.X;
-            CurrentMousePosition.Y = mouse.Y;
-            DrawPos.X = CurrentTetrisObject.Width % 2 == 0
-                ? CurrentMousePosition.X - CurrentMousePosition.X % 20
-                : CurrentMousePosition.X - CurrentMousePosition.X % 20 - 10;
-            DrawPos.Y = CurrentTetrisObject.Height % 2 == 0
-                ? CurrentMousePosition.Y - CurrentMousePosition.Y % 20
-                : CurrentMousePosition.Y - CurrentMousePosition.Y % 20 - 10;
+            currentMousePosition.X = mouse.X;
+            currentMousePosition.Y = mouse.Y;
+            drawPos.X = CurrentTetrisObject.Width % 2 == 0
+                ? currentMousePosition.X - currentMousePosition.X % 20
+                : currentMousePosition.X - currentMousePosition.X % 20 - 10;
+            drawPos.Y = CurrentTetrisObject.Height % 2 == 0
+                ? currentMousePosition.Y - currentMousePosition.Y % 20
+                : currentMousePosition.Y - currentMousePosition.Y % 20 - 10;
             CurrentTetrisObject.CanBeSetted = CanCurrentObjectBeSetted(gameTime);
             GetHandleInput(keyboard, mouse, gameTime);
             CheckDelayStatus(gameTime);
@@ -96,58 +98,48 @@ namespace Tetris_Adventures.Managers
 
         public void GetHandleInput(KeyboardState keyboard, MouseState mouse, GameTime gameTime)
         {
-            foreach (var keyboardKey in KeyboardKeys)
+            foreach (var keyboardKey in keyboardKeys)
             {
                 if (keyboard.IsKeyDown(keyboardKey.Key))
-                {
                     ChangeCurrentTetrisFigure(keyboardKey.Value, gameTime);
-                }
             }
             if (keyboard.IsKeyDown(Keys.C))
-            {
                 ClearMap();
-            }
             if (mouse.LeftButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
-                && gameTime.TotalGameTime.TotalMilliseconds - SetObjectTimeCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - setObjectTimeCheck > delay)
             {
-                var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+                var possibleObject = GetCollisionTetrisObject(CurrentTetrisObject, drawPos);
                 if (CurrentTetrisObject.CanBeSetted)
                 {
                     AddTetrisObject(possibleObject);
-                    DelaysDictionary[CurrentTetrisObject.Figure] = (gameTime.TotalGameTime.TotalMilliseconds, false);
-                    SetObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                    setObjectTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                    DelaysDictionary[CurrentTetrisObject.Figure] = (setObjectTimeCheck, false);
+                    
                 }
             }
             if (mouse.RightButton == ButtonState.Pressed
                 && CurrentTetrisObject.Figure != TetrisFigure.None
-                && gameTime.TotalGameTime.TotalMilliseconds - RotateTimeCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - rotateTimeCheck > delay)
             {
                 CurrentTetrisObject.Rotate();
-                RotateTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
+                rotateTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
         }
 
         public List<Rectangle> GetCollisionTetrisObject(TetrisObject tetrisObject, Vector2 drawPos)
         {
-            switch (tetrisObject.Figure)
+            return tetrisObject.Figure switch
             {
-                case TetrisFigure.IShape:
-                    return GetIShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.JShape:
-                    return GetJShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.LShape:
-                    return GetLShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.OShape:
-                    return GetOShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.ZShape:
-                    return GetZShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.TShape:
-                    return GetTShapeRectangles(tetrisObject, drawPos);
-                case TetrisFigure.SShape:
-                    return GetSShapeRectangles(tetrisObject, drawPos);
-            }
-            return new List<Rectangle>();
+                TetrisFigure.IShape => GetIShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.JShape => GetJShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.LShape => GetLShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.OShape => GetOShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.ZShape => GetZShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.TShape => GetTShapeRectangles(tetrisObject, drawPos),
+                TetrisFigure.SShape => GetSShapeRectangles(tetrisObject, drawPos),
+                _ => new List<Rectangle>(),
+            };
         }
 
         public void ChangeCurrentTetrisFigure(TetrisFigure tetrisFigure, GameTime gameTime)
@@ -163,14 +155,14 @@ namespace Tetris_Adventures.Managers
            
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (var tetrisObject in DrawnFigures)
+            foreach (var tetrisObject in drawnFigures)
             {
                 spriteBatch.Draw(TetrisSpriteSheet, tetrisObject.Position, Shapes[tetrisObject.Figure], Color.White, (float)tetrisObject.RotationCorner, tetrisObject.Origin, 1f, SpriteEffects.None, 0f);
             } 
             if (CurrentTetrisObject.Figure != TetrisFigure.None)
             {
                 spriteBatch.Draw(TetrisSpriteSheet,
-                    DrawPos,
+                    drawPos,
                     Shapes[CurrentTetrisObject.Figure],
                     CurrentTetrisObject.CanBeSetted ? Color.GhostWhite : Color.DarkSlateGray,
                     (float)CurrentTetrisObject.RotationCorner,
@@ -183,27 +175,28 @@ namespace Tetris_Adventures.Managers
 
         #region TetrisCanBeSetted
 
-        public bool CanCurrentObjectBeSetted(GameTime gameTime) => !IsGroundOfOtherFiguresIntersected() && !IsPlayerHitboxIntersected() && IsTouchingOtherFigureOrSurface() && IsDelayPassed(gameTime, CurrentTetrisObject.Figure);
+        public bool CanCurrentObjectBeSetted(GameTime gameTime) => !IsGroundOfOtherFiguresIntersected() 
+            && !IsPlayerHitboxIntersected() 
+            && IsTouchingOtherFigureOrSurface() 
+            && IsDelayPassed(gameTime, CurrentTetrisObject.Figure);
 
         public bool IsPlayerHitboxIntersected()
         {
-            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, drawPos);
             foreach (var square in squares)
             {
-                if (Player.Hitbox.Intersects(square))
-                {
+                if (player.Hitbox.Intersects(square)) 
                     return true;
-                }
             }
             return false;
         }
 
         public bool IsGroundOfOtherFiguresIntersected()
         {
-            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, drawPos);
             foreach (var square in squares)
             {
-                foreach (var obj in MapManager.CollisionObjects)
+                foreach (var obj in mapManager.CollisionObjects)
                 {
                     if (square.Intersects(obj)) return true;
                 }
@@ -213,16 +206,16 @@ namespace Tetris_Adventures.Managers
 
         public bool IsTouchingOtherFigureOrSurface()
         {
-            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
-            return squares.Intersect(EnvironmentTetrisSquares).Count() > 0 || IsTouchingSurface();
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, drawPos);
+            return squares.Intersect(environmentTetrisSquares).Count() > 0 || IsTouchingSurface();
         }
 
         public bool IsTouchingSurface()
         {
-            var squares = GetCollisionTetrisObject(CurrentTetrisObject, DrawPos);
+            var squares = GetCollisionTetrisObject(CurrentTetrisObject, drawPos);
             foreach (var square in squares)
             {
-                foreach (var obj in MapManager.SurfaceRectangles)
+                foreach (var obj in mapManager.SurfaceRectangles)
                 {
                     if (square.Intersects(obj)) return true;
                 }
@@ -232,7 +225,7 @@ namespace Tetris_Adventures.Managers
 
         public bool IsDelayPassed(GameTime gameTime, TetrisFigure tetrisFigure) 
         {
-           if (gameTime.TotalGameTime.TotalMilliseconds - DelaysDictionary[tetrisFigure].Item1 > 5000)
+           if (gameTime.TotalGameTime.TotalMilliseconds - DelaysDictionary[tetrisFigure].Item1 > setObjectDelay)
             {
                 DelaysDictionary[tetrisFigure] = (0, true);
             }
@@ -243,7 +236,7 @@ namespace Tetris_Adventures.Managers
         {
             foreach(var obj in DelaysDictionary)
             {
-                if ( IsDelayPassed(gameTime, obj.Key))
+                if (IsDelayPassed(gameTime, obj.Key))
                 {
                     DelaysDictionary[obj.Key] = (0, true);
                 }
@@ -282,22 +275,19 @@ namespace Tetris_Adventures.Managers
 
         public void ClearMap()
         {
-            MapManager.CollisionObjects.RemoveRange(MapManager.CollisionObjects.Count - DrawnFigures.Count * 4, DrawnFigures.Count * 4);
-            MapManager.SurfaceRectangles.RemoveRange(MapManager.SurfaceRectangles.Count - DrawnFigures.Count * 4, DrawnFigures.Count * 4);
-            DrawnFigures.Clear();
-            EnvironmentTetrisSquares.Clear();
-            foreach (var obj in DelaysDictionary)
-            {
-                DelaysDictionary[obj.Key] = (0, true);
-            }
+            mapManager.CollisionObjects.RemoveRange(mapManager.CollisionObjects.Count - drawnFigures.Count * 4, drawnFigures.Count * 4);
+            mapManager.SurfaceRectangles.RemoveRange(mapManager.SurfaceRectangles.Count - drawnFigures.Count * 4, drawnFigures.Count * 4);
+            drawnFigures.Clear();
+            environmentTetrisSquares.Clear();
+            ResetDelays();
         }
 
         public void AddTetrisObject(List<Rectangle> possibleObject)
         {
-            MapManager.CollisionObjects.AddRange(possibleObject);
-            MapManager.SurfaceRectangles.AddRange(possibleObject);
-            DrawnFigures.Add(new TetrisObject(CurrentTetrisObject, DrawPos));
-            EnvironmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
+            mapManager.CollisionObjects.AddRange(possibleObject);
+            mapManager.SurfaceRectangles.AddRange(possibleObject);
+            drawnFigures.Add(new TetrisObject(CurrentTetrisObject, drawPos));
+            environmentTetrisSquares.AddRange(GetEnvironmentSquares(possibleObject));
         }
 
         #region Tetris Figures Collision

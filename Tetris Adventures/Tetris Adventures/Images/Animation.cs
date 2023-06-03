@@ -6,13 +6,14 @@ namespace Tetris_Adventures.Images
 {
     public class Animation
     {
-        Texture2D spritesheet;
-        int frames;
-        int pointer = 0;
-        int width;
-        int height;
-        float timeSinceLastFrame;
-        bool IsLooping;
+        private readonly Texture2D spritesheet;
+        private readonly bool IsLooping;
+        private readonly int width;
+        private readonly int height;
+        private readonly int frames;
+        private int pointer;
+        private float timeSinceLastFrame;
+
         public Animation(Texture2D spritesheet, int width, int height, bool isLooping)
         {
             this.spritesheet = spritesheet;
@@ -24,23 +25,24 @@ namespace Tetris_Adventures.Images
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position, GameTime gameTime, int row, float millisecondsPerFrames)
         {
-            if (pointer <= frames)
-            {
-                var rectangle = new Rectangle(width * pointer, height * (row - 1), width, height);
-                spriteBatch.Draw(spritesheet, position, rectangle, Color.White);
-                timeSinceLastFrame += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (timeSinceLastFrame > millisecondsPerFrames)
-                {
-                    timeSinceLastFrame -= millisecondsPerFrames;
-                    if (pointer != frames && IsLooping)
-                    {
-                        pointer++;
-                    }
+            var rectangle = new Rectangle(width * pointer, height * (row - 1), width, height);
+            spriteBatch.Draw(spritesheet, position, rectangle, Color.White);
+            UpdatePointer(gameTime, millisecondsPerFrames);
+        }
 
-                    if (pointer == frames)
-                    {
-                        pointer = 0;
-                    }
+        private void UpdatePointer(GameTime gameTime, float millisecondsPerFrames)
+        {
+            timeSinceLastFrame += (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timeSinceLastFrame > millisecondsPerFrames)
+            {
+                timeSinceLastFrame -= millisecondsPerFrames;
+                if (pointer != frames && IsLooping)
+                {
+                    pointer++;
+                }
+                if (pointer == frames)
+                {
+                    pointer = 0;
                 }
             }
         }

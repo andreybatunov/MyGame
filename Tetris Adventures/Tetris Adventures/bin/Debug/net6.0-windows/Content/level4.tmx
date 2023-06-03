@@ -177,7 +177,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="10" name="collisions" visible="0">
+ <objectgroup id="10" name="collisions">
   <object id="1" name="surface" x="-79" y="611.5" width="258" height="19"/>
   <object id="2" x="0.666667" y="767.333" width="382.667" height="30.6667"/>
   <object id="4" x="412" y="701.333" width="1028" height="99.3333"/>
@@ -198,20 +198,20 @@
   <object id="19" x="1216" y="0" width="224" height="327"/>
   <object id="21" name="surface" x="384.5" y="673.5" width="26" height="63.25"/>
   <object id="23" name="death" x="-84" y="734.667" width="466.667" height="30.6667"/>
-  <object id="24" name="death" x="384.667" y="640" width="99.3333" height="28"/>
-  <object id="25" name="death" x="480.667" y="608" width="98" height="32.6667"/>
-  <object id="26" name="death" x="576.667" y="576" width="128.667" height="29.3333"/>
-  <object id="27" name="death" x="704.667" y="543.333" width="126" height="32"/>
-  <object id="29" name="death" x="832.667" y="512" width="127.333" height="31.3333"/>
-  <object id="30" name="death" x="959.333" y="480.667" width="97.3333" height="32"/>
-  <object id="31" name="death" x="1056.67" y="446.667" width="94.6667" height="33.3333"/>
-  <object id="32" name="death" x="1088.5" y="319.5" width="95" height="32"/>
-  <object id="33" name="death" x="991" y="288" width="96" height="30"/>
-  <object id="34" name="death" x="895" y="255" width="94.5" height="30.5"/>
-  <object id="35" name="death" x="800" y="225" width="94.5" height="28.5"/>
-  <object id="36" name="death" x="702.5" y="189.5" width="98" height="33"/>
-  <object id="37" name="death" x="575.5" y="159" width="128.5" height="29"/>
-  <object id="38" name="death" x="479.5" y="125.5" width="95.5" height="31.5"/>
+  <object id="24" name="death" x="384.667" y="646" width="99.3333" height="22"/>
+  <object id="25" name="death" x="494.667" y="618" width="84" height="22.6667"/>
+  <object id="26" name="death" x="592.667" y="584" width="112.667" height="21.3333"/>
+  <object id="27" name="death" x="717.667" y="552.333" width="113" height="23"/>
+  <object id="29" name="death" x="846.667" y="519" width="113.333" height="24.3333"/>
+  <object id="30" name="death" x="976.333" y="487.667" width="80.3333" height="25"/>
+  <object id="31" name="death" x="1070.67" y="454.667" width="80.6667" height="25.3333"/>
+  <object id="32" name="death" x="1088.5" y="319.5" width="95" height="24"/>
+  <object id="33" name="death" x="991" y="288" width="96" height="24"/>
+  <object id="34" name="death" x="895" y="255" width="94.5" height="26.5"/>
+  <object id="35" name="death" x="800" y="225" width="94.5" height="25.1667"/>
+  <object id="36" name="death" x="702.5" y="189.5" width="98" height="28.3333"/>
+  <object id="37" name="death" x="575.5" y="159" width="128.5" height="24.3333"/>
+  <object id="38" name="death" x="479.5" y="125.5" width="95.5" height="24.8333"/>
   <object id="39" name="surface" x="-93" y="-90" width="9" height="818.667"/>
   <object id="41" name="surface" x="479.5" y="-90" width="23" height="213"/>
   <object id="42" name="surface" x="1152" y="448.333" width="385.333" height="29.6667"/>

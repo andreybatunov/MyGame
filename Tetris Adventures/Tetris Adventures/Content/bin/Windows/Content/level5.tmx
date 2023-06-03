@@ -238,15 +238,15 @@
  <objectgroup id="9" name="collisions">
   <object id="2" name="surface" x="-102.5" y="704.667" width="359.833" height="28.6667"/>
   <object id="5" name="surface" x="256" y="672" width="44" height="29.3333"/>
-  <object id="8" name="death" x="309.334" y="645.333" width="268" height="26"/>
+  <object id="8" name="death" x="311.834" y="646.333" width="265.5" height="25"/>
   <object id="12" name="surface" x="579.333" y="640.667" width="284.667" height="28.6667"/>
   <object id="13" name="surface" x="863.333" y="608.667" width="41.3333" height="28.6667"/>
-  <object id="14" name="death" x="920" y="580.666" width="262.666" height="26"/>
+  <object id="14" name="death" x="920" y="581.666" width="262.666" height="25"/>
   <object id="15" name="death" x="1274.67" y="551.333" width="100.667" height="24"/>
   <object id="17" name="surface" x="1185.33" y="576" width="78.6667" height="30"/>
   <object id="18" name="surface" x="1376.67" y="254.667" width="29.3333" height="287.333"/>
   <object id="19" name="surface" x="1153.33" y="229.333" width="222" height="25.3333"/>
-  <object id="20" name="death" x="805.333" y="223.333" width="344.667" height="22"/>
+  <object id="20" name="death" x="805.333" y="223.333" width="344.667" height="25.3333"/>
   <object id="21" name="surface" x="766.667" y="191.333" width="32" height="30"/>
   <object id="22" name="surface" x="514" y="162" width="252.667" height="28.6667"/>
   <object id="23" name="death" x="392.333" y="160" width="117.667" height="21.5"/>

@@ -10,29 +10,30 @@ namespace Tetris_Adventures.Objects
     public class Player : Entity
     {
         public Vector2 Velocity;
-        public float PlayerSpeed = 2.4f;
-        public float FallSpeed = 6;
-        public float JumpSpeed = -12;
-        public float StartY;
-        public bool IsFalling = true;
-        public bool IsJumping = false;
-        public double JumpDelay = 0;
-        public Rectangle PlayerFallRectangle;
-        public Rectangle PlayerJumpRectangle;
         public Direction Direction = Direction.Right;
-        public TilemapManager TilemapManager;
         public bool IsAlive = true;
         public bool IsReachedFinish = false;
 
-
-        public Animation[] playerAnimation;
-        public CurrentAnimation playerAnimationController;
+        public float StartY;
+        private const float playerSpeed = 2.4f;
+        private const float fallSpeed = 6f;
+        private float jumpSpeed = -12f;
+        
+        private bool isFalling = true;
+        private bool isJumping = false;
+        private double jumpDelayCheck;
+        private Rectangle playerFallRectangle;
+        private Rectangle playerJumpRectangle;
+        
+        private TilemapManager tilemapManager;
+        private Animation[] playerAnimation;
+        private CurrentAnimation playerAnimationController;
 
         public Player(TilemapManager tilemapManager, Texture2D spawningSprite, Texture2D runSprite, Texture2D idleSprite, Texture2D fallingSprite, Texture2D jumpingSprite)
         {
-            TilemapManager = tilemapManager;
-            Position = TilemapManager.StartPosition;
-            Velocity = TilemapManager.StartPosition;
+            this.tilemapManager = tilemapManager;
+            Position = this.tilemapManager.StartPosition;
+            Velocity = this.tilemapManager.StartPosition;
             StartY = Position.Y;
             playerAnimation = new Animation[]
             {
@@ -43,8 +44,8 @@ namespace Tetris_Adventures.Objects
                 new Animation(jumpingSprite, 29, 53, false)
             };
             Hitbox = new Rectangle((int)Position.X, (int)Position.Y, 40, 35);
-            PlayerFallRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y + 40, 35, 1);
-            PlayerJumpRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y, 35, 1);
+            playerFallRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y + 40, 35, 1);
+            playerJumpRectangle = new Rectangle((int)Position.X - 3, (int)Position.Y, 35, 1);
         }
 
         public override void Update(GameTime gameTime)
@@ -58,9 +59,9 @@ namespace Tetris_Adventures.Objects
             playerAnimationController = Direction == Direction.Right
                 ? CurrentAnimation.IdleRight
                 : CurrentAnimation.IdleLeft;
-            if (IsFalling)
+            if (isFalling)
             {
-                Velocity.Y += FallSpeed;
+                Velocity.Y += fallSpeed;
                 playerAnimationController = Direction == Direction.Right
                     ? CurrentAnimation.RightFalling
                     : CurrentAnimation.LeftFalling;
@@ -69,7 +70,7 @@ namespace Tetris_Adventures.Objects
 
             Move(keyboard);
             StartY = Position.Y;
-            Jump(keyboard, gameTime, initPosition);
+            Jump(keyboard, gameTime);
 
             UpdateHitboxes();
             GetCollisions(initPosition);
@@ -78,20 +79,20 @@ namespace Tetris_Adventures.Objects
 
         public void GetCollisions(Vector2 initPosition)
         {
-            foreach (var rectangle in TilemapManager.SurfaceRectangles)
+            foreach (var rectangle in tilemapManager.SurfaceRectangles)
             {
-                if (rectangle.Intersects(PlayerFallRectangle))
+                if (rectangle.Intersects(playerFallRectangle))
                 {
-                    IsFalling = false;
+                    isFalling = false;
                     break;
                 }
-                if (!IsJumping)
+                if (!isJumping)
                 {
-                    IsFalling = true;
+                    isFalling = true;
                 }
 
             }
-            foreach (var rectangle in TilemapManager.SurfaceRectangles)
+            foreach (var rectangle in tilemapManager.SurfaceRectangles)
             {
                 if (rectangle.Intersects(Hitbox))
                 {
@@ -100,21 +101,21 @@ namespace Tetris_Adventures.Objects
                     break;
                 }
             }
-            foreach (var rectangle in TilemapManager.SurfaceRectangles)
+            foreach (var rectangle in tilemapManager.SurfaceRectangles)
             {
-                if (rectangle.Intersects(PlayerJumpRectangle))
+                if (rectangle.Intersects(playerJumpRectangle))
                 {
-                    IsJumping = false;
+                    isJumping = false;
                 }
             }
-            foreach (var rectangle in TilemapManager.DeathRectangles)
+            foreach (var rectangle in tilemapManager.DeathRectangles)
             {
-                if (rectangle.Intersects(PlayerFallRectangle))
+                if (rectangle.Intersects(playerFallRectangle))
                 {
                     IsAlive = false;
                 }
             }
-            if (TilemapManager.FinishRectangle.Intersects(Hitbox))
+            if (tilemapManager.FinishRectangle.Intersects(Hitbox))
             {
                 IsReachedFinish = true;
             }
@@ -124,15 +125,15 @@ namespace Tetris_Adventures.Objects
         {
             if (keyboard.IsKeyDown(Keys.A))
             {
-                Velocity.X -= PlayerSpeed;
-                if (!IsJumping && !IsFalling)
+                Velocity.X -= playerSpeed;
+                if (!isJumping && !isFalling)
                 {
                     playerAnimationController = CurrentAnimation.RunLeft;
                     Direction = Direction.Left;
                 }
                 else
                 {
-                    playerAnimationController = IsJumping
+                    playerAnimationController = isJumping
                         ? CurrentAnimation.LeftJumping
                         : CurrentAnimation.LeftFalling;
                     Direction = Direction.Left;
@@ -141,15 +142,15 @@ namespace Tetris_Adventures.Objects
 
             if (keyboard.IsKeyDown(Keys.D))
             {
-                Velocity.X += PlayerSpeed;
-                if (!IsJumping && !IsFalling)
+                Velocity.X += playerSpeed;
+                if (!isJumping && !isFalling)
                 {
                     playerAnimationController = CurrentAnimation.RunRight;
                     Direction = Direction.Right;
                 }
                 else
                 {
-                    playerAnimationController = IsJumping
+                    playerAnimationController = isJumping
                         ? CurrentAnimation.RightJumping
                         : CurrentAnimation.RightFalling;
                     Direction = Direction.Right;
@@ -158,34 +159,30 @@ namespace Tetris_Adventures.Objects
 
         }
 
-        private void Jump(KeyboardState keyboard, GameTime gameTime, Vector2 initPosition)
+        private void Jump(KeyboardState keyboard, GameTime gameTime)
         {
-            if (IsJumping)
+            if (isJumping)
             {
 
-                Velocity.Y += JumpSpeed;
-                JumpSpeed += 1;
-
+                Velocity.Y += jumpSpeed;
+                jumpSpeed += 1;
                 Move(keyboard);
                 playerAnimationController = Direction == Direction.Right
                     ? CurrentAnimation.RightJumping
                     : CurrentAnimation.LeftJumping;
-
                 if (Velocity.Y >= StartY)
                 {
-                    IsJumping = false;
+                    isJumping = false;
                 }
-
-
             }
             else
             {
-                if (keyboard.IsKeyDown(Keys.Space) && !IsFalling && gameTime.TotalGameTime.TotalMilliseconds - JumpDelay > 600)
+                if (keyboard.IsKeyDown(Keys.Space) && !isFalling && gameTime.TotalGameTime.TotalMilliseconds - jumpDelayCheck > 600)
                 {
-                    IsJumping = true;
-                    IsFalling = false;
-                    JumpSpeed = -12;
-                    JumpDelay = gameTime.TotalGameTime.TotalMilliseconds;
+                    isJumping = true;
+                    isFalling = false;
+                    jumpSpeed = -12;
+                    jumpDelayCheck = gameTime.TotalGameTime.TotalMilliseconds;
                 }
             }
         }
@@ -196,10 +193,10 @@ namespace Tetris_Adventures.Objects
                 ? (int)Position.X
                 : (int)Position.X - 3;
             Hitbox.Y = (int)Position.Y - 3;
-            PlayerFallRectangle.X = (int)Position.X;
-            PlayerFallRectangle.Y = (int)Velocity.Y + 39;
-            PlayerJumpRectangle.X = (int)Position.X;
-            PlayerJumpRectangle.Y = (int)Velocity.Y;
+            playerFallRectangle.X = (int)Position.X;
+            playerFallRectangle.Y = (int)Velocity.Y + 39;
+            playerJumpRectangle.X = (int)Position.X;
+            playerJumpRectangle.Y = (int)Velocity.Y;
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
@@ -207,9 +204,6 @@ namespace Tetris_Adventures.Objects
             if (IsAlive)
                 switch (playerAnimationController)
                 {
-                    case CurrentAnimation.Spawning:
-                        playerAnimation[0].Draw(spriteBatch, Position, gameTime, 1, 100);
-                        break;
                     case CurrentAnimation.IdleRight:
                         playerAnimation[2].Draw(spriteBatch, Position, gameTime, 1, 150);
                         break;

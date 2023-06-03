@@ -148,7 +148,7 @@ namespace Tetris_Adventures
             levelTitle = Content.Load<Texture2D>("levelSheet");
             levelNumbers = Content.Load<Texture2D>("levelNumbers");
             uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player, 
-                numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
+                numbersSheet, gameOverSheet, gameOverReturnSheet, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
             #endregion
 
             #region Menu
@@ -234,7 +234,7 @@ namespace Tetris_Adventures
             player = new Player(tilemapManager, spawningPlayerSprite, runningPlayerSprite, playerSprite, fallingPlayerSprite, jumpingPlayerSprite);
             tetrisManager = new TetrisManager(tetrisSprite, tilemapManager, player);
             uiManager = new UIManager(menuManager, tilemapManager, tetrisManager, player,
-                numbersSheet, gameOverSheet, gameOverReturnSheet, tetrisSprite, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
+                numbersSheet, gameOverSheet, gameOverReturnSheet, bubbleSheet, missionCompleted, missionCompletedReturn, levelTitle, levelNumbers);
             pausePage.ResetLevelAfterExit = false;
         }
     }

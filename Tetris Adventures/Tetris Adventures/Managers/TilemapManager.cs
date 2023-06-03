@@ -46,16 +46,13 @@ namespace Tetris_Adventures.Managers
                 {
                     var gid = Maps[Level].TileLayers[i].Tiles[j].Gid;
                     if (gid == 0) continue;
-                    else
-                    {
-                        var tileFrame = gid - 1;
-                        var column = tileFrame % TilesetTilesWide;
-                        var row = (int)Math.Floor(tileFrame / (double)TilesetTilesWide);
-                        var x = j % Maps[Level].Width * Maps[Level].TileWidth;
-                        var y = (float)Math.Floor(j / (double)Maps[Level].Width) * Maps[Level].TileHeight;
-                        var tilesetRec = new Rectangle(TileWidth * column, TileHeight * row, TileWidth, TileHeight);
-                        spriteBatch.Draw(Tileset, new Rectangle((int)x, (int)y, TileWidth, TileHeight), tilesetRec, Color.White);
-                    }
+                    var tileFrame = gid - 1;
+                    var column = tileFrame % TilesetTilesWide;
+                    var row = (int)Math.Floor(tileFrame / (double)TilesetTilesWide);
+                    var x = j % Maps[Level].Width * Maps[Level].TileWidth;
+                    var y = (float)Math.Floor(j / (double)Maps[Level].Width) * Maps[Level].TileHeight;
+                    var tilesetRec = new Rectangle(TileWidth * column, TileHeight * row, TileWidth, TileHeight);
+                    spriteBatch.Draw(Tileset, new Rectangle((int)x, (int)y, TileWidth, TileHeight), tilesetRec, Color.White);
                 }
             }
             spriteBatch.Draw(Finish, new Vector2(FinishRectangle.X, FinishRectangle.Y), new Rectangle(0, 0, 50, 50), Color.White, 0f, new Vector2(25,25), 1.25f, SpriteEffects.None, 0f);

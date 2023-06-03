@@ -8,14 +8,16 @@ namespace Tetris_Adventures.Menus
 {
     public class PausePage : MenuManager
     {
-        public MenuOption CurrentOption;
-        public Texture2D MenuBackground;
-        public Texture2D PauseLogo;
-        public Texture2D ContinueSheet;
-        public Texture2D HowToPlaySheet;
-        public Texture2D PauseExitSheet;
-        public double ChangeOptionCheck;
         public bool ResetLevelAfterExit;
+        private const int delay = 200;
+        private readonly Texture2D MenuBackground;
+        private readonly Texture2D PauseLogo;
+        private readonly Texture2D ContinueSheet;
+        private readonly Texture2D HowToPlaySheet;
+        private readonly Texture2D PauseExitSheet;
+        private MenuOption CurrentOption;
+        private double ChangeOptionCheck;
+        
         public MenuManager MenuManager { get; set; }
 
         public PausePage(MenuManager menuManager, Texture2D menuBackground, Texture2D pauseLogo, Texture2D continueSheet, Texture2D howToPlaySheet, Texture2D pauseExitSheet)
@@ -38,20 +40,20 @@ namespace Tetris_Adventures.Menus
         public void GetHandleInput(KeyboardState keyboard, GameTime gameTime)
         {
             if (keyboard.IsKeyDown(Keys.Escape) 
-                && gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - MenuManager.JumpTimeCheck > delay)
             {
                 MenuManager.GameState = GameStates.Game;
                 MenuManager.JumpTimeCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
 
             if (keyboard.IsKeyDown(Keys.Down)
-                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > delay)
             {
                 CurrentOption.Option = (MenuOptions)((int)(CurrentOption.Option + 1) % 3);
                 ChangeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
             }
             if (keyboard.IsKeyDown(Keys.Up)
-                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > 200)
+                && gameTime.TotalGameTime.TotalMilliseconds - ChangeOptionCheck > delay)
             {
                 CurrentOption.Option = (MenuOptions)((int)(CurrentOption.Option + 2) % 3);
                 ChangeOptionCheck = gameTime.TotalGameTime.TotalMilliseconds;
