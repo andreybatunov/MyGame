@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="71">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="45" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="72">
  <tileset firstgid="1" name="newTileset" tilewidth="32" tileheight="32" tilecount="832" columns="32">
   <image source="newTileset.png" width="1024" height="832"/>
  </tileset>
@@ -209,7 +209,7 @@
   <object id="55" name="surface" x="1092" y="189" width="27" height="125"/>
   <object id="56" name="surface" x="898" y="321" width="26" height="185"/>
   <object id="57" name="surface" x="803" y="479" width="89" height="29"/>
-  <object id="58" name="death " x="801" y="512" width="95" height="23"/>
+  <object id="58" name="death" x="801" y="512" width="95" height="23"/>
   <object id="59" name="death" x="779" y="165.364" width="19" height="322.636"/>
   <object id="60" name="death" x="477" y="478" width="112" height="24"/>
   <object id="61" name="surface" x="479" y="452" width="123" height="22"/>
@@ -221,5 +221,6 @@
   <object id="67" name="death" x="931" y="64" width="61" height="28"/>
   <object id="68" name="death" x="994" y="1" width="20" height="59"/>
   <object id="70" name="death" x="930.333" y="320.333" width="163" height="27"/>
+  <object id="71" name="death" x="1120" y="164.5" width="21.5" height="136.5"/>
  </objectgroup>
 </map>
